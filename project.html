@@ -1,779 +1,219 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>Presidium ??Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <style>
-    @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=Playfair+Display:wght@500;600&display=swap");
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: radial-gradient(circle at top, #f7f7f5 0%, #dcd9d2 60%, #cfcac3 100%);
-      font-family: "IBM Plex Sans", "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: #111;
-      letter-spacing: 0.01em;
-      position: relative;
-      overflow: hidden;
-    }
-
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-image: url("https://upload.wikimedia.org/wikipedia/commons/5/5f/Noise_texture.jpg");
-      opacity: 0.08;
-      pointer-events: none;
-      mix-blend-mode: multiply;
-    }
-
-    .frame {
-      width: min(1180px, 96vw);
-      height: min(660px, 92vh);
-      background: linear-gradient(180deg, #f8f8f4 0%, #f0f0ec 100%);
-      border-radius: 34px;
-      border: 9px solid #0b0b0b;
-      box-shadow: 0 45px 80px rgba(0, 0, 0, 0.45), inset 0 -8px 35px rgba(0, 0, 0, 0.08);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-    }
-
-    .frame::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(to right, rgba(0, 0, 0, 0.09) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(0, 0, 0, 0.09) 1px, transparent 1px);
-      background-size: 18px 18px;
-      opacity: 0.15;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .top-bar {
-      position: relative;
-      z-index: 1;
-      padding: 28px 48px 18px 48px;
-      border-bottom: 3px solid #111;
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      background: linear-gradient(180deg, #fefefe 0%, #f3f2f0 100%);
-    }
-
-    .brand {
-      font-family: "Playfair Display", "Times New Roman", serif;
-      font-size: clamp(38px, 4vw, 52px);
-      font-weight: 600;
-      letter-spacing: 0.04em;
-    }
-
-    .brand span:last-child {
-      font-style: italic;
-      margin-left: 6px;
-    }
-
-    .top-lines {
-      margin-top: 6px;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .top-lines div {
-      height: 2px;
-      background: #111;
-      margin-bottom: 4px;
-      width: min(420px, 40vw);
-    }
-
-    .top-lines div:nth-child(1) { opacity: 0.95; }
-    .top-lines div:nth-child(2) { opacity: 0.8; }
-    .top-lines div:nth-child(3) { opacity: 0.65; }
-    .top-lines div:nth-child(4) { opacity: 0.5; }
-    .top-lines div:nth-child(5) { opacity: 0.35; }
-
-    .top-right {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      font-size: 12px;
-    }
-
-    .top-icon {
-      width: 34px;
-      height: 26px;
-      border: 2px solid #111;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
-      box-shadow: 0 2px 0 #111;
-      background: #fff;
-    }
-
-    .top-icon:active {
-      transform: translateY(2px);
-      box-shadow: 0 0 0 #111;
-    }
-
-    .clock {
-      min-width: 70px;
-      text-align: right;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .main {
-      flex: 1;
-      position: relative;
-      z-index: 1;
-      padding: 70px 96px 42px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: flex-end;
-      gap: 32px;
-    }
-
-    .icon-grid {
-      display: flex;
-      gap: 32px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .app-card {
-      width: 120px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      cursor: pointer;
-      user-select: none;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .app-icon {
-      width: 86px;
-      height: 76px;
-      border-radius: 24px;
-      border: 3px solid #111;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 26px;
-      font-weight: 600;
-      background: linear-gradient(180deg, #fff 0%, #e5e5e2 100%);
-      box-shadow: 0 5px 0 #111;
-      transition:
-        transform 0.18s ease,
-        box-shadow 0.18s ease,
-        background 0.18s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .app-label {
-      font-size: 11px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      font-weight: 500;
-    }
-
-    .app-card:hover .app-icon,
-    .app-card.is-active .app-icon {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 0 #111;
-      background: #f0f0f0;
-    }
-
-    .app-card:active .app-icon {
-      transform: translateY(2px);
-      box-shadow: 0 0 0 #111;
-    }
-
-    .app-icon::before,
-    .app-icon::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .icon-folder::before {
-      width: 62px;
-      height: 40px;
-      border: 2px solid #111;
-      border-radius: 14px;
-      top: 24px;
-      background: linear-gradient(180deg, #fdfdfd 0%, #dededc 100%);
-    }
-
-    .icon-folder::after {
-      width: 30px;
-      height: 12px;
-      border: 2px solid #111;
-      border-bottom: none;
-      border-radius: 8px 8px 0 0;
-      top: 18px;
-      background: #ededeb;
-      left: calc(50% - 10px);
-      transform: none;
-    }
-
-    .icon-heart::before {
-      width: 42px;
-      height: 36px;
-      top: 24px;
-      background: transparent;
-      border: 2px solid #111;
-      border-radius: 12px;
-    }
-
-    .icon-heart::after {
-      top: 32px;
-      left: 50%;
-      width: 26px;
-      height: 22px;
-      background: transparent;
-      border: 2px solid #111;
-      border-top: none;
-      border-radius: 0 0 14px 14px;
-      transform: translateX(-50%);
-    }
-
-    .icon-figma {
-      background: #111;
-      color: #f5f5f5;
-      font-family: "IBM Plex Sans", sans-serif;
-    }
-
-    .icon-figma::before {
-      content: "F";
-      position: static;
-      transform: none;
-      font-size: 34px;
-      font-weight: 600;
-    }
-
-    .icon-mac::before {
-      width: 52px;
-      height: 38px;
-      border: 2px solid #111;
-      border-radius: 10px;
-      top: 20px;
-    }
-
-    .icon-mac::after {
-      width: 46px;
-      height: 6px;
-      border: 2px solid #111;
-      border-top: none;
-      border-radius: 0 0 10px 10px;
-      top: 56px;
-    }
-
-    .frame-inner-shadow {
-      position: absolute;
-      inset: 0;
-      border-radius: 18px;
-      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
-      pointer-events: none;
-      z-index: 2;
-    }
-
-    .project-preview {
-      width: 100%;
-      max-width: 900px;
-      align-self: center;
-      background: linear-gradient(180deg, #fafafa 0%, #f0f0ee 100%);
-      border: 3px solid #111;
-      border-radius: 30px;
-      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.25);
-      padding: 24px 32px 30px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      opacity: 0.75;
-      transform: translateY(10px);
-      transition: opacity 0.25s ease, transform 0.25s ease;
-    }
-
-    .project-preview.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .preview-top {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-    }
-
-    .preview-close {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      border: 2px solid #111;
-      background: transparent;
-      font-size: 20px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .preview-lines {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .preview-lines span {
-      display: block;
-      height: 2px;
-      background: #111;
-      opacity: 0.7;
-    }
-
-    .preview-body {
-      display: grid;
-      grid-template-columns: 220px 1fr;
-      gap: 32px;
-    }
-
-    .preview-sidebar {
-      border-right: 2px solid rgba(0, 0, 0, 0.2);
-      padding-right: 24px;
-    }
-
-    .preview-sidebar h3 {
-      font-size: 13px;
-      letter-spacing: 0.12em;
-      margin-bottom: 16px;
-    }
-
-    .preview-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      font-size: 14px;
-    }
-
-    .preview-list li button {
-      width: 100%;
-      padding: 6px 12px;
-      border-radius: 14px;
-      border: 1px solid transparent;
-      background: transparent;
-      text-align: left;
-      font: inherit;
-      color: rgba(0, 0, 0, 0.6);
-      cursor: pointer;
-      transition: transform 0.15s ease, border-color 0.15s ease, color 0.15s ease;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .preview-list li button::before {
-      content: "";
-      width: 16px;
-      height: 12px;
-      border-radius: 4px;
-      border: 2px solid currentColor;
-      display: inline-block;
-    }
-
-    .preview-list li.active button,
-    .preview-list li button:hover {
-      color: #000;
-      border-color: rgba(0, 0, 0, 0.4);
-      transform: translateX(4px);
-    }
-
-    .preview-content h2 {
-      font-family: "Playfair Display", "Times New Roman", serif;
-      font-size: clamp(34px, 4vw, 48px);
-      margin-bottom: 16px;
-    }
-
-    .preview-tags {
-      font-size: 13px;
-      letter-spacing: 0.2em;
-      color: rgba(0, 0, 0, 0.6);
-      margin-bottom: 10px;
-      text-transform: uppercase;
-    }
-
-    .preview-content p {
-      font-size: 15px;
-      color: rgba(0, 0, 0, 0.8);
-      margin-bottom: 20px;
-      max-width: 520px;
-      line-height: 1.6;
-    }
-
-    .preview-actions {
-      display: flex;
-      gap: 14px;
-      align-items: center;
-      margin-top: 6px;
-    }
-
-    .preview-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      border: 2px solid #111;
-      border-radius: 999px;
-      padding: 8px 18px;
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      text-decoration: none;
-      color: inherit;
-      box-shadow: 0 4px 0 #111;
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
-    }
-
-    .preview-link span {
-      font-size: 11px;
-    }
-
-    .preview-link:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 0 #111;
-    }
-
-    .preview-link:active {
-      transform: translateY(1px);
-      box-shadow: 0 2px 0 #111;
-    }
-
-    .preview-link.is-hidden {
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .preview-shot {
-      width: 100%;
-      height: 180px;
-      border-radius: 18px;
-      border: 2px solid #111;
-      background: linear-gradient(180deg, #fdfdfd 0%, #d8d8d6 100%);
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: flex-end;
-      padding: 16px;
-      font-size: 18px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(0, 0, 0, 0.75);
-    }
-
-    .preview-shot::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image: linear-gradient(rgba(255, 255, 255, 0.4), transparent);
-      mix-blend-mode: screen;
-    }
-
-    .preview-shot span {
-      position: relative;
-      z-index: 1;
-    }
-
-    @media (max-width: 768px) {
-      .frame {
-        height: calc(100vh - 32px);
-      }
-
-      .top-bar {
-        padding: 14px 16px 8px;
-      }
-
-      .brand {
-        font-size: 28px;
-      }
-
-      .top-lines div {
-        width: 220px;
-      }
-
-      .main {
-        padding: 40px 24px 32px;
-        align-items: center;
-      }
-
-      .icon-grid {
-        justify-content: center;
-      }
-
-      .project-preview {
-        padding: 20px;
-      }
-
-      .preview-body {
-        grid-template-columns: 1fr;
-        border-top: 1px solid rgba(0, 0, 0, 0.1);
-        padding-top: 16px;
-      }
-
-      .preview-sidebar {
-        border-right: none;
-        padding-right: 0;
-      }
-    }
-  </style>
+  <title>Projects · Eunho Kim</title>
+  <link rel="stylesheet" href="css/retro.css" />
 </head>
 <body>
-  <div class="frame">
-    <div class="frame-inner-shadow"></div>
+  <div class="browser-shell">
+    <div class="browser-tabs">
+      <span class="browser-tab">공부</span>
+      <span class="browser-tab">역학</span>
+      <span class="browser-tab is-current">성공3</span>
+      <span class="browser-tab">백준</span>
+      <span class="browser-tab">VR</span>
+      <span class="browser-tab">성공</span>
+      <span class="browser-tab">성공2</span>
+      <span class="browser-tab">코딩2</span>
+      <span class="browser-tab">Meta Horizon</span>
+      <span class="browser-tab">부산소마고</span>
+      <span class="browser-tab">유니티</span>
+    </div>
 
-    <!-- ?곷떒 諛?-->
-    <header class="top-bar">
-      <div>
-        <div class="brand">
-          <span>Presidium</span><span> Studio</span>
-        </div>
-        <div class="top-lines">
-          <div></div><div></div><div></div><div></div><div></div>
-        </div>
-      </div>
-
-            <div class="top-right">
-        <a href="mailto:kehlove09@gmail.com" class="top-icon" aria-label="메일 보내기">✉</a>
-        <button class="top-icon" type="button" aria-label="인트로 재생">▶</button>
-        <button class="top-icon" type="button" aria-label="새로 고침">↺</button>
-        <div class="clock" id="clock">--:--</div>
-      </div>
-    </header>
-
-    <!-- 메인 컨텐츠 -->
-    <main class="main">
-      <nav class="icon-grid">
-        <a class="app-card" href="index.html">
-          <div class="app-icon icon-folder"></div>
-          <div class="app-label">Back</div>
-        </a>
-        <a
-          class="app-card"
-          href="https://octet-rule.vercel.app/"
-          data-project="octet"
-          data-title="Octet Rule Lab"
-          data-tags="Interactive · Next.js"
-          data-description="옥텟 규칙을 직관적으로 익힐 수 있도록 전자를 드래그해 궤도를 채워 보는 실험실 인터페이스입니다."
-          data-preview="전자 궤도 시뮬레이터"
-          data-list="Octet Rule"
-        >
-          <div class="app-icon icon-folder"></div>
-          <div class="app-label">Octet-rule</div>
-        </a>
-        <a
-          class="app-card"
-          href="https://presidium-systems.vercel.app/"
-          data-project="presidium"
-          data-title="Presidium Systems"
-          data-tags="Dashboard · Web"
-          data-description="브랜드 자산과 실험 프로젝트를 한 화면에서 관리하는 내부 운영 패널로, 빈티지 모니터 UI에서 영감을 받았습니다."
-          data-preview="운영 패널"
-          data-list="Presidium Systems"
-        >
-          <div class="app-icon icon-folder"></div>
-          <div class="app-label">Presidium Systems</div>
-        </a>
-        <a
-          class="app-card"
-          href="https://code-chache.vercel.app/"
-          data-project="code"
-          data-title="Code Chache"
-          data-tags="Design · Figma"
-          data-description="코드 스니펫과 UI 패턴을 수집해 카탈로그처럼 훑어볼 수 있는 미니 레퍼런스 허브입니다."
-          data-preview="스니펫 보관소"
-          data-list="Code Chache"
-        >
-          <div class="app-icon icon-figma"></div>
-          <div class="app-label">Code-chache</div>
-        </a>
-        <a
-          class="app-card"
-          href="https://email-cleaner-chi.vercel.app/"
-          data-project="email"
-          data-title="Email Cleaner"
-          data-tags="Automation · React"
-          data-description="구독 이메일을 카테고리별로 분류하고 원클릭으로 정리할 수 있는 자동화 도구입니다."
-          data-preview="Inbox Detox"
-          data-list="Email Cleaner"
-        >
-          <div class="app-icon icon-heart"></div>
-          <div class="app-label">Email-cleaner</div>
-        </a>
-        <a
-          class="app-card"
-          href="https://subscription-d-day.vercel.app/"
-          data-project="subscription"
-          data-title="Subscription D-Day"
-          data-tags="Calendar · Vanilla JS"
-          data-description="각종 구독 결제일을 타임라인으로 보여 주고 남은 일수를 계산해 주는 대시보드입니다."
-          data-preview="만료 카운터"
-          data-list="Subscription"
-        >
-          <div class="app-icon icon-folder"></div>
-          <div class="app-label">subscription-d-day</div>
-        </a>
-        <a
-          class="app-card"
-          href="https://seatpicker.vercel.app/"
-          data-project="seatpicker"
-          data-title="Seat Picker"
-          data-tags="UI · Accessibility"
-          data-description="극장 좌석을 2D 그리드에서 살펴보고 최적의 시야를 찾도록 돕는 예약 인터페이스입니다."
-          data-preview="시트 맵"
-          data-list="Seat Picker"
-        >
-          <div class="app-icon icon-mac"></div>
-          <div class="app-label">seatpicker</div>
-        </a>
-      </nav>
-
-      <section class="project-preview">
-        <header class="preview-top">
-          <button class="preview-close" type="button" aria-label="창 닫기">×</button>
-          <div class="preview-lines">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
+    <section class="desktop-shell">
+      <header class="desktop-top">
+        <div>
+          <div class="brandmark">
+            <span>Eunho</span><span>Kim</span>
           </div>
-          <div class="clock" aria-hidden="true">PM 11:00</div>
-        </header>
+          <div class="top-lines">
+            <span class="top-line"></span>
+            <span class="top-line"></span>
+            <span class="top-line"></span>
+            <span class="top-line"></span>
+            <span class="top-line"></span>
+          </div>
+        </div>
+        <div class="top-right">
+          <a class="status-icon" href="index.html" aria-label="첫 화면">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 11l7-7 7 7"></path>
+              <path d="M5 11v9h14v-9"></path>
+            </svg>
+          </a>
+          <a class="status-icon" href="aboutme.html" aria-label="소개로">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="8" r="3"></circle>
+              <path d="M5 20c1.5-3 4-5 7-5s5.5 2 7 5"></path>
+            </svg>
+          </a>
+          <div class="clock" id="clock">--:--</div>
+        </div>
+      </header>
 
-        <div class="preview-body">
-          <aside class="preview-sidebar">
-            <h3>PROYECTOS WEB</h3>
-            <ul class="preview-list"></ul>
-          </aside>
-
-          <div class="preview-content">
-            <h2 class="preview-title">프로젝트를 선택하세요</h2>
-            <p class="preview-tags">Select A Folder</p>
-            <p class="preview-description">
-              오른쪽 폴더를 클릭하면 이 영역에 세부 설명과 데모 링크가 나타납니다.
-            </p>
-            <div class="preview-shot" aria-hidden="true"><span>Presidium Studio</span></div>
-            <div class="preview-actions">
-              <a class="preview-link" href="#" target="_blank" rel="noopener">
-                Visit Site <span>↗</span>
-              </a>
+      <main class="desktop-main">
+        <article class="window project-layout">
+          <header class="window-top">
+            <button class="window-close" type="button" aria-label="닫기">X</button>
+            <div class="window-lines">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
             </div>
+            <div class="window-title">PROJECT ARCHIVE</div>
+          </header>
+
+          <div class="window-body">
+            <ul class="folder-list" id="projectList">
+              <li>
+                <button class="folder-item is-active"
+                  data-title="CoDuck 유지 보수 플랫폼"
+                  data-tags="WORDPRESS · ELEMENTOR · STRIPE"
+                  data-description="소규모 비즈니스가 웹 유지 보수 요청을 티켓 형태로 보내면 24시간 내에 처리해 주는 구독형 서비스입니다. Trello 자동화와 Stripe 셀프 결제 흐름까지 직접 설계했습니다."
+                  data-preview="CODUCK SERVICE"
+                  data-url="https://honored-innocent-624.notion.site/Eunho-Kim-XR-VR-Developer-Portpolio-26a0a67a58178094953cecb7e3689249?source=copy_link">
+                  <span class="folder-glyph" aria-hidden="true"></span>
+                  <span>CoDuck</span>
+                </button>
+              </li>
+              <li>
+                <button class="folder-item"
+                  data-title="Octet Rule Lab"
+                  data-tags="INTERACTIVE · NEXT.JS"
+                  data-description="화학 옥텟 규칙을 AR 카드로 실험할 수 있는 교육용 웹랩입니다. 카드 위치에 따라 분자 모형이 생성되고, 사용자가 직접 결합을 시도할 수 있습니다."
+                  data-preview="CHEMISTRY LAB"
+                  data-url="">
+                  <span class="folder-glyph" aria-hidden="true"></span>
+                  <span>Octet Rule</span>
+                </button>
+              </li>
+              <li>
+                <button class="folder-item"
+                  data-title="Presidium Systems"
+                  data-tags="DASHBOARD · WEB"
+                  data-description="연구 장비 컨디션을 실시간으로 보여 주는 하드웨어 통합 대시보드입니다. 미세한 노이즈 패턴과 도트 타이포로 레트로 UI를 구현했습니다."
+                  data-preview="CONTROL PANEL"
+                  data-url="https://honored-innocent-624.notion.site/Eunho-Kim-XR-VR-Developer-Portpolio-26a0a67a58178094953cecb7e3689249?source=copy_link">
+                  <span class="folder-glyph" aria-hidden="true"></span>
+                  <span>Presidium</span>
+                </button>
+              </li>
+              <li>
+                <button class="folder-item"
+                  data-title="Code Cache"
+                  data-tags="DESIGN · FIGMA"
+                  data-description="코드 스니펫을 보드에 붙여 두고, 로컬에서 곧바로 검색할 수 있는 오프라인 스토리지 UX를 디자인했습니다. 커맨드 팔레트와 타이포 시스템을 직접 설계했습니다."
+                  data-preview="CODE CACHE"
+                  data-url="">
+                  <span class="folder-glyph" aria-hidden="true"></span>
+                  <span>Code Cache</span>
+                </button>
+              </li>
+              <li>
+                <button class="folder-item"
+                  data-title="Email Cleaner"
+                  data-tags="AUTOMATION · REACT"
+                  data-description="메일을 카테고리별로 정리하고 반복되는 알림을 자동으로 끊는 도구입니다. 4단계 온보딩과 스케줄러를 통해 소음 없는 받은편지함을 제공합니다."
+                  data-preview="INBOX DETOX"
+                  data-url="">
+                  <span class="folder-glyph" aria-hidden="true"></span>
+                  <span>Email Cleaner</span>
+                </button>
+              </li>
+              <li>
+                <button class="folder-item"
+                  data-title="Subscription D-Day"
+                  data-tags="CALENDAR · VANILLA JS"
+                  data-description="구독 만료일을 스티커처럼 모으는 캘린더입니다. 각 플랜의 남은 기간을 타임라인으로 시각화하여 비용을 직관적으로 보여 줍니다."
+                  data-preview="PLAN BOARD"
+                  data-url="">
+                  <span class="folder-glyph" aria-hidden="true"></span>
+                  <span>Subscription</span>
+                </button>
+              </li>
+              <li>
+                <button class="folder-item"
+                  data-title="Seat Picker"
+                  data-tags="UI · ACCESSIBILITY"
+                  data-description="극장 좌석을 쉽게 고를 수 있는 인터랙티브 픽커입니다. 스크린 스케일을 자동으로 조정하고 키보드로 모든 좌석을 탐색할 수 있도록 ARIA 패턴을 구현했습니다."
+                  data-preview="SEAT PICKER"
+                  data-url="">
+                  <span class="folder-glyph" aria-hidden="true"></span>
+                  <span>Seat Picker</span>
+                </button>
+              </li>
+            </ul>
+
+            <section class="preview-pane">
+              <div class="preview-tags" id="previewTags">PROJECT · TAGS</div>
+              <h2 class="preview-headline" id="previewTitle">프로젝트를 선택하세요</h2>
+              <p class="preview-description" id="previewDescription">
+                왼쪽의 폴더를 클릭하면 작업 설명과 링크가 나타납니다. 섬세한 타이포와 격자 질감으로 구성된 Presdium OS의 창을 즐겨 주세요.
+              </p>
+              <div class="preview-shot" id="previewShot">SELECT FILE</div>
+              <div class="preview-actions">
+                <a class="retro-link is-disabled" id="previewLink" href="#" target="_blank" rel="noopener">
+                  Visit Site
+                  <svg viewBox="0 0 16 16">
+                    <path d="M4 12l8-8"></path>
+                    <path d="M6 4h6v6"></path>
+                  </svg>
+                </a>
+                <a class="retro-link secondary" href="index.html">Back Home</a>
+              </div>
+            </section>
           </div>
-        </div>
-      </section>
-    </main>
+        </article>
+      </main>
+    </section>
   </div>
 
-    <script>
-    // 간단한 시계 (오전/오후 + 분단위)
-    function updateClock() {
-      const el = document.getElementById("clock");
+  <script>
+    const clockEl = document.getElementById("clock");
+    const updateClock = () => {
       const now = new Date();
-      let h = now.getHours();
-      const m = now.getMinutes().toString().padStart(2, "0");
-      const isPM = h >= 12;
-      if (h === 0) h = 12;
-      else if (h > 12) h -= 12;
-      el.textContent = (isPM ? "PM " : "AM ") + h + ":" + m;
-    }
+      const hour = now.getHours();
+      const minutes = now.getMinutes().toString().padStart(2, "0");
+      const isAm = hour < 12;
+      const displayHour = hour % 12 === 0 ? 12 : hour % 12;
+      clockEl.textContent = `${isAm ? "AM" : "PM"} ${displayHour}:${minutes}`;
+    };
     updateClock();
     setInterval(updateClock, 10_000);
 
-    // 프로젝트 미리보기 인터랙션
-    (function initProjectPreview() {
-      const preview = document.querySelector(".project-preview");
-      if (!preview) return;
+    const listItems = document.querySelectorAll(".folder-item");
+    const previewTitle = document.getElementById("previewTitle");
+    const previewTags = document.getElementById("previewTags");
+    const previewDescription = document.getElementById("previewDescription");
+    const previewShot = document.getElementById("previewShot");
+    const previewLink = document.getElementById("previewLink");
 
-      const cards = Array.from(document.querySelectorAll(".app-card[data-project]"));
-      if (!cards.length) return;
+    const updatePreview = (item) => {
+      listItems.forEach((btn) => btn.classList.toggle("is-active", btn === item));
+      previewTitle.textContent = item.dataset.title;
+      previewTags.textContent = item.dataset.tags || "PROJECT";
+      previewDescription.textContent = item.dataset.description || "";
+      previewShot.textContent = item.dataset.preview || item.dataset.title;
 
-      const previewTitle = preview.querySelector(".preview-title");
-      const previewTags = preview.querySelector(".preview-tags");
-      const previewDescription = preview.querySelector(".preview-description");
-      const previewShot = preview.querySelector(".preview-shot");
-      const previewLink = preview.querySelector(".preview-link");
-      const previewList = preview.querySelector(".preview-list");
+      if (item.dataset.url) {
+        previewLink.href = item.dataset.url;
+        previewLink.classList.remove("is-disabled");
+      } else {
+        previewLink.href = "#";
+        previewLink.classList.add("is-disabled");
+      }
+    };
 
-      previewLink.classList.add("is-hidden");
-      previewList.innerHTML = "";
+    listItems.forEach((item) => {
+      item.addEventListener("click", () => updatePreview(item));
+    });
 
-      const createListEntry = (card) => {
-        const li = document.createElement("li");
-        const button = document.createElement("button");
-        button.type = "button";
-        button.dataset.projectRef = card.dataset.project;
-        button.textContent = card.dataset.list || card.dataset.title || card.dataset.project;
-        button.addEventListener("click", () => selectProject(card));
-        li.appendChild(button);
-        previewList.appendChild(li);
-      };
-
-      const selectProject = (card) => {
-        cards.forEach((c) => c.classList.toggle("is-active", c === card));
-        preview.classList.add("active");
-
-        previewTitle.textContent = card.dataset.title || "Untitled Project";
-        previewTags.textContent = card.dataset.tags || "";
-        previewDescription.textContent =
-          card.dataset.description || "프로젝트 설명이 아직 준비되지 않았습니다.";
-
-        const previewText = card.dataset.preview || card.dataset.title || "";
-        previewShot.innerHTML = previewText ? `<span>${previewText}</span>` : "";
-
-        if (card.href && card.getAttribute("href") !== "#") {
-          previewLink.href = card.href;
-          previewLink.classList.remove("is-hidden");
-        } else {
-          previewLink.classList.add("is-hidden");
-        }
-
-        previewList.querySelectorAll("li").forEach((li) => {
-          const button = li.querySelector("button");
-          const isActive = button?.dataset.projectRef === card.dataset.project;
-          li.classList.toggle("active", Boolean(isActive));
-        });
-      };
-
-      cards.forEach(createListEntry);
-
-      cards.forEach((card) => {
-        card.addEventListener("click", (event) => {
-          event.preventDefault();
-          selectProject(card);
-        });
-      });
-    })();
+    if (listItems.length) {
+      updatePreview(listItems[0]);
+    }
   </script>
 </body>
 </html>
-
-
-

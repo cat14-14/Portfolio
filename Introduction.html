@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Design Notes · Eunho Kim</title>
+  <link rel="stylesheet" href="css/retro.css" />
+</head>
+<body>
+  <div class="browser-shell">
+    <div class="browser-tabs">
+      <span class="browser-tab">공부</span>
+      <span class="browser-tab">역학</span>
+      <span class="browser-tab">성공3</span>
+      <span class="browser-tab">백준</span>
+      <span class="browser-tab">VR</span>
+      <span class="browser-tab is-current">성공</span>
+      <span class="browser-tab">성공2</span>
+      <span class="browser-tab">코딩2</span>
+      <span class="browser-tab">Meta Horizon</span>
+      <span class="browser-tab">부산소마고</span>
+      <span class="browser-tab">유니티</span>
+    </div>
+
+    <section class="desktop-shell">
+      <header class="desktop-top">
+        <div>
+          <div class="brandmark">
+            <span>Eunho</span><span>Kim</span>
+          </div>
+          <div class="top-lines">
+            <span class="top-line"></span>
+            <span class="top-line"></span>
+            <span class="top-line"></span>
+            <span class="top-line"></span>
+            <span class="top-line"></span>
+          </div>
+        </div>
+        <div class="top-right">
+          <a class="status-icon" href="index.html" aria-label="홈으로">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 11l7-7 7 7"></path>
+              <path d="M5 11v9h14v-9"></path>
+            </svg>
+          </a>
+          <a class="status-icon" href="project.html" aria-label="프로젝트">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+              <path d="M4 10h16M10 4v16"></path>
+            </svg>
+          </a>
+          <div class="clock" id="clock">--:--</div>
+        </div>
+      </header>
+
+      <main class="desktop-main">
+        <article class="window">
+          <header class="window-top">
+            <button class="window-close" type="button" aria-label="닫기">X</button>
+            <div class="window-lines">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <div class="window-title">DESIGN NOTES</div>
+          </header>
+
+          <div class="window-body two-column">
+            <section class="info-card about-text">
+              <h3>PRINCIPLES</h3>
+              <p>
+                메모지, 타자기, CRT의 표면감을 차용해 낯선 기술을 친숙하게 느끼도록 만듭니다.
+                선명한 그리드와 빈티지한 곡선을 섞어 물성이 느껴지는 인터페이스를 설계합니다.
+              </p>
+              <p>
+                모든 화면은 ‘한 장의 포스터’처럼 보이도록 구성합니다.
+                사용자가 안심하고 탐험할 수 있는 무대를 만드는 것이 목표입니다.
+              </p>
+            </section>
+
+            <section class="info-card">
+              <h3>RESEARCH THREADS</h3>
+              <ul>
+                <li>RETRO WEB OS · Rafa Heras 스타일 탐구</li>
+                <li>XR/VR 공간에 어울리는 UI 프레임 연구</li>
+                <li>Grid texture + serif 조합의 타이포 실험</li>
+              </ul>
+            </section>
+
+            <section class="info-card">
+              <h3>TOOLSET</h3>
+              <div class="chip-list">
+                <span class="chip">Figma</span>
+                <span class="chip">After Effects</span>
+                <span class="chip">Blender</span>
+                <span class="chip">Illustrator</span>
+                <span class="chip">Spline</span>
+                <span class="chip">Notion</span>
+              </div>
+            </section>
+
+            <section class="info-card">
+              <h3>RECENT MOCKS</h3>
+              <div class="design-grid">
+                <article class="design-card">
+                  <small>XR STUDY</small>
+                  <h4>Immersive Whiteboard</h4>
+                  <p>VR 환경에서 모눈 배경과 타자기 타이포를 입혀 팀 아이디어 세션을 위한 협업 보드를 디자인했습니다.</p>
+                </article>
+                <article class="design-card">
+                  <small>BRAND</small>
+                  <h4>Presidium Badge</h4>
+                  <p>모노그램과 와이어프레임을 혼합해 빈티지 스티커를 만들고, 프로젝트 카드에 일관된 아이덴티티를 부여했습니다.</p>
+                </article>
+                <article class="design-card">
+                  <small>UI</small>
+                  <h4>Library Terminal</h4>
+                  <p>서체 ‘Playfair Display’와 픽셀 아이콘을 결합해 디지털 도서관 단말기를 시각화했습니다.</p>
+                </article>
+              </div>
+            </section>
+
+            <section class="note-card">
+              도트 무늬와 굵은 라인은 단지 장식이 아니라,
+              사용자의 시선과 감정을 안내하는 안전선입니다.
+              이 페이지는 그러한 실험을 기록하는 스케치북입니다.
+            </section>
+          </div>
+        </article>
+      </main>
+    </section>
+  </div>
+
+  <script>
+    const clockEl = document.getElementById("clock");
+    const updateClock = () => {
+      const now = new Date();
+      const hour = now.getHours();
+      const minutes = now.getMinutes().toString().padStart(2, "0");
+      const isAm = hour < 12;
+      const displayHour = hour % 12 === 0 ? 12 : hour % 12;
+      clockEl.textContent = `${isAm ? "AM" : "PM"} ${displayHour}:${minutes}`;
+    };
+    updateClock();
+    setInterval(updateClock, 10_000);
+  </script>
+</body>
+</html>

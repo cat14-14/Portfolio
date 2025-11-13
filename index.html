@@ -2,295 +2,126 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>Presidium – Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <style>
-    /* 1) 전체 레이아웃 기본 */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #f3f3f3;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        sans-serif;
-      color: #111;
-    }
-
-    .frame {
-      width: min(1200px, 100vw - 40px);
-      height: min(650px, 100vh - 40px);
-      background: #f8f8f8;
-      border-radius: 20px;
-      border: 6px solid #111;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-    }
-
-    /* 2) 모눈 배경 (텍스처 느낌) */
-    .frame::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
-      background-size: 16px 16px;
-      opacity: 0.9;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* 3) 상단 바 */
-    .top-bar {
-      position: relative;
-      z-index: 1;
-      padding: 18px 28px 10px 28px;
-      border-bottom: 2px solid #111;
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      background: #fdfdfd;
-    }
-
-    .brand {
-      font-size: 32px;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-    }
-
-    .brand span:last-child {
-      font-weight: 400;
-    }
-
-    .top-lines {
-      margin-top: 6px;
-    }
-
-    .top-lines div {
-      height: 2px;
-      background: #111;
-      margin-bottom: 3px;
-      width: 360px;
-      max-width: 45vw;
-    }
-    git remote add origin
-    .top-lines div:nth-child(1) { opacity: 0.95; }
-    .top-lines div:nth-child(2) { opacity: 0.8; }
-    .top-lines div:nth-child(3) { opacity: 0.65; }
-    .top-lines div:nth-child(4) { opacity: 0.5; }
-    .top-lines div:nth-child(5) { opacity: 0.35; }
-
-    .top-right {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 14px;
-    }
-
-    .top-icon {
-      width: 26px;
-      height: 22px;
-      border: 2px solid #111;
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
-      box-shadow: 0 2px 0 #111;
-      background: #fdfdfd;
-    }
-
-    .top-icon:active {
-      transform: translateY(2px);
-      box-shadow: 0 0 0 #111;
-    }
-
-    .clock {
-      min-width: 70px;
-      text-align: right;
-      font-variant-numeric: tabular-nums;
-    }
-
-    /* 4) 메인 영역 */
-    .main {
-      flex: 1;
-      position: relative;
-      z-index: 1;
-      padding: 70px 80px 60px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: flex-end;
-    }
-
-    .icon-grid {
-      display: flex;
-      gap: 40px;
-      margin-top: 10px;
-    }
-
-    .app-card {
-      width: 120px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      cursor: pointer;
-      user-select: none;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .app-icon {
-      width: 90px;
-      height: 80px;
-      border-radius: 18px;
-      border: 3px solid #111;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 32px;
-      font-weight: 700;
-      background: #fdfdfd;
-      box-shadow: 0 4px 0 #111;
-      transition:
-        transform 0.18s ease,
-        box-shadow 0.18s ease,
-        background 0.18s ease;
-    }
-
-    .app-label {
-      font-size: 13px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .app-card:hover .app-icon {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 0 #111;
-      background: #f0f0f0;
-    }
-
-    .app-card:active .app-icon {
-      transform: translateY(2px);
-      box-shadow: 0 0 0 #111;
-    }
-
-    /* 5) 하단 살짝 그림자/테두리 강조 */
-    .frame-inner-shadow {
-      position: absolute;
-      inset: 0;
-      border-radius: 18px;
-      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
-      pointer-events: none;
-      z-index: 2;
-    }
-
-    /* 반응형 (모바일 축소) */
-    @media (max-width: 768px) {
-      .frame {
-        height: calc(100vh - 32px);
-      }
-
-      .top-bar {
-        padding: 14px 16px 8px;
-      }
-
-      .brand {
-        font-size: 24px;
-      }
-
-      .top-lines div {
-        width: 220px;
-      }
-
-      .main {
-        padding: 40px 24px 32px;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .icon-grid {
-        gap: 24px;
-      }
-    }
-  </style>
+  <title>Eunho Kim · Retro Portfolio OS</title>
+  <link rel="stylesheet" href="css/retro.css" />
 </head>
 <body>
-  <div class="frame">
-    <div class="frame-inner-shadow"></div>
+  <div class="browser-shell">
+    <div class="browser-tabs">
+      <span class="browser-tab is-current">공부</span>
+      <span class="browser-tab">역학</span>
+      <span class="browser-tab">성공3</span>
+      <span class="browser-tab">백준</span>
+      <span class="browser-tab">VR</span>
+      <span class="browser-tab">성공</span>
+      <span class="browser-tab">성공2</span>
+      <span class="browser-tab">코딩2</span>
+      <span class="browser-tab">Meta Horizon</span>
+      <span class="browser-tab">부산소마고</span>
+      <span class="browser-tab">도서관</span>
+      <span class="browser-tab">유니티</span>
+    </div>
 
-    <!-- 상단 바 -->
-    <header class="top-bar">
-      <div>
-        <div class="brand">
-          <span>Presidium</span><span> Studio</span>
+    <section class="desktop-shell">
+      <header class="desktop-top">
+        <div>
+          <div class="brandmark">
+            <span>Eunho</span><span>Kim</span>
+          </div>
+          <div class="top-lines">
+            <span class="top-line"></span>
+            <span class="top-line"></span>
+            <span class="top-line"></span>
+            <span class="top-line"></span>
+            <span class="top-line"></span>
+          </div>
         </div>
-        <div class="top-lines">
-          <div></div><div></div><div></div><div></div><div></div>
+
+        <div class="top-right">
+          <button class="status-icon" aria-label="사운드">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 10h3l4-4v12l-4-4H4z"></path>
+              <path d="M16 9a3 3 0 0 1 0 6"></path>
+              <path d="M18.5 6.8a6 6 0 0 1 0 10.4"></path>
+            </svg>
+          </button>
+          <a class="status-icon" href="mailto:kehlove09@gmail.com" aria-label="메일">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="6" width="18" height="12" rx="2"></rect>
+              <path d="M4 8l8 6 8-6"></path>
+            </svg>
+          </a>
+          <button class="status-icon" aria-label="연결 상태">
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 10c4.8-4 15.2-4 20 0"></path>
+              <path d="M5 13c3.2-3 10.8-3 14 0"></path>
+              <path d="M8 16c1.6-2 6.4-2 8 0"></path>
+              <circle cx="12" cy="19" r="1.4"></circle>
+            </svg>
+          </button>
+          <div class="clock" id="clock">--:--</div>
         </div>
-      </div>
+      </header>
 
-      <div class="top-right">
-        <a href="mailto:kehlove09@gmail.com" class="top-icon">✉</a>
-        <!-- <div class="top-icon" >✉</div> -->
-        <div class="top-icon">▶</div>
-        <div class="top-icon">⟳</div>
-        <div class="clock" id="clock">--:--</div>
-      </div>
-    </header>
-
-    <!-- 메인 컨텐츠 -->
-    <main class="main">
-      <nav class="icon-grid">
-        <a class="app-card" href="project.html">
-          <div class="app-icon">📁</div>
-          <div class="app-label">Projects</div>
-        </a>
-        <a class="app-card" href="#designs">
-          <div class="app-icon">🎨</div>
-          <div class="app-label">Designss</div>
-        </a>
-        <a class="app-card" href="#social">
-          <div class="app-icon">♥</div>
-          <div class="app-label">Sociall</div>
-        </a>
-        <a class="app-card" href="aboutme.html">
-          <div class="app-icon">💻</div>
-          <div class="app-label">About Me</div>
-        </a>
-      </nav>
-    </main>
+      <main class="desktop-main">
+        <nav class="icon-grid">
+          <a class="app-card" href="project.html">
+            <div class="app-icon">
+              <svg class="icon-svg" viewBox="0 0 48 48" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 16h38v21H5z"></path>
+                <path d="M5 16l7-7h12l6 7"></path>
+              </svg>
+            </div>
+            <div class="app-label">Projects</div>
+          </a>
+          <a class="app-card" href="Introduction.html">
+            <div class="app-icon">
+              <svg class="icon-svg" viewBox="0 0 48 48" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="8" y="8" width="12" height="12"></rect>
+                <rect x="28" y="8" width="12" height="12"></rect>
+                <rect x="8" y="28" width="12" height="12"></rect>
+                <rect x="28" y="28" width="12" height="12"></rect>
+              </svg>
+            </div>
+            <div class="app-label">Designs</div>
+          </a>
+          <a class="app-card" href="https://www.linkedin.com/in/eunho-kim-xr" target="_blank" rel="noopener noreferrer">
+            <div class="app-icon">
+              <svg class="icon-svg" viewBox="0 0 48 48" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M24 36l-9-9a6 6 0 0 1 0-8 6 6 0 0 1 8.8-.2L24 20l.2-.2a6 6 0 0 1 8.8.2 6 6 0 0 1 0 8z"></path>
+              </svg>
+            </div>
+            <div class="app-label">Social Life</div>
+          </a>
+          <a class="app-card" href="aboutme.html">
+            <div class="app-icon">
+              <svg class="icon-svg" viewBox="0 0 48 48" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="10" y="8" width="28" height="20" rx="4"></rect>
+                <path d="M6 38h36"></path>
+                <path d="M18 28l-6 10"></path>
+                <path d="M30 28l6 10"></path>
+              </svg>
+            </div>
+            <div class="app-label">About Me</div>
+          </a>
+        </nav>
+      </main>
+    </section>
   </div>
 
   <script>
-    // 간단한 시계 (오전/오후 + 시:분)
-    function updateClock() {
-      const el = document.getElementById("clock");
+    const clockEl = document.getElementById("clock");
+    const formatClock = () => {
       const now = new Date();
-      let h = now.getHours();
-      const m = now.getMinutes().toString().padStart(2, "0");
-      const isPM = h >= 12;
-      if (h === 0) h = 12;
-      else if (h > 12) h -= 12;
-      el.textContent = (isPM ? "PM " : "AM ") + h + ":" + m;
-    }
-    updateClock();
-    setInterval(updateClock, 10_000);
+      const hour = now.getHours();
+      const minutes = now.getMinutes().toString().padStart(2, "0");
+      const isAm = hour < 12;
+      const displayHour = hour % 12 === 0 ? 12 : hour % 12;
+      clockEl.textContent = `${isAm ? "AM" : "PM"} ${displayHour}:${minutes}`;
+    };
+    formatClock();
+    setInterval(formatClock, 10_000);
   </script>
 </body>
 </html>
