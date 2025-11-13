@@ -1,12 +1,13 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>Presidium – Portfolio</title>
+  <title>Presidium ??Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <style>
-    /* 1) 전체 레이아웃 기본 */
+    <style>
+    @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=Playfair+Display:wght@500;600&display=swap");
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -18,71 +19,84 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #f3f3f3;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        sans-serif;
+      background: radial-gradient(circle at top, #f7f7f5 0%, #dcd9d2 60%, #cfcac3 100%);
+      font-family: "IBM Plex Sans", "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: #111;
+      letter-spacing: 0.01em;
+      position: relative;
+      overflow: hidden;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: url("https://upload.wikimedia.org/wikipedia/commons/5/5f/Noise_texture.jpg");
+      opacity: 0.08;
+      pointer-events: none;
+      mix-blend-mode: multiply;
     }
 
     .frame {
-      width: min(1200px, 100vw - 40px);
-      height: min(650px, 100vh - 40px);
-      background: #f8f8f8;
-      border-radius: 20px;
-      border: 6px solid #111;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+      width: min(1180px, 96vw);
+      height: min(660px, 92vh);
+      background: linear-gradient(180deg, #f8f8f4 0%, #f0f0ec 100%);
+      border-radius: 34px;
+      border: 9px solid #0b0b0b;
+      box-shadow: 0 45px 80px rgba(0, 0, 0, 0.45), inset 0 -8px 35px rgba(0, 0, 0, 0.08);
       overflow: hidden;
       display: flex;
       flex-direction: column;
       position: relative;
     }
 
-    /* 2) 모눈 배경 (텍스처 느낌) */
     .frame::before {
       content: "";
       position: absolute;
       inset: 0;
       background-image:
-        linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
-      background-size: 16px 16px;
-      opacity: 0.9;
+        linear-gradient(to right, rgba(0, 0, 0, 0.09) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.09) 1px, transparent 1px);
+      background-size: 18px 18px;
+      opacity: 0.15;
       pointer-events: none;
       z-index: 0;
     }
 
-    /* 3) 상단 바 */
     .top-bar {
       position: relative;
       z-index: 1;
-      padding: 18px 28px 10px 28px;
-      border-bottom: 2px solid #111;
+      padding: 28px 48px 18px 48px;
+      border-bottom: 3px solid #111;
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
-      background: #fdfdfd;
+      background: linear-gradient(180deg, #fefefe 0%, #f3f2f0 100%);
     }
 
     .brand {
-      font-size: 32px;
-      font-weight: 700;
-      letter-spacing: 0.03em;
+      font-family: "Playfair Display", "Times New Roman", serif;
+      font-size: clamp(38px, 4vw, 52px);
+      font-weight: 600;
+      letter-spacing: 0.04em;
     }
 
     .brand span:last-child {
-      font-weight: 400;
+      font-style: italic;
+      margin-left: 6px;
     }
 
     .top-lines {
       margin-top: 6px;
+      display: flex;
+      flex-direction: column;
     }
 
     .top-lines div {
       height: 2px;
       background: #111;
-      margin-bottom: 3px;
-      width: 360px;
-      max-width: 45vw;
+      margin-bottom: 4px;
+      width: min(420px, 40vw);
     }
 
     .top-lines div:nth-child(1) { opacity: 0.95; }
@@ -94,24 +108,24 @@
     .top-right {
       display: flex;
       align-items: center;
-      gap: 12px;
-      font-size: 14px;
+      gap: 14px;
+      font-size: 12px;
     }
 
     .top-icon {
-      width: 26px;
-      height: 22px;
+      width: 34px;
+      height: 26px;
       border: 2px solid #111;
-      border-radius: 6px;
+      border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 12px;
-      font-weight: 600;
+      font-size: 14px;
+      font-weight: 500;
       cursor: pointer;
       transition: transform 0.15s ease, box-shadow 0.15s ease;
       box-shadow: 0 2px 0 #111;
-      background: #fdfdfd;
+      background: #fff;
     }
 
     .top-icon:active {
@@ -125,29 +139,27 @@
       font-variant-numeric: tabular-nums;
     }
 
-    /* 4) 메인 영역 */
     .main {
       flex: 1;
       position: relative;
       z-index: 1;
-      padding: 70px 80px 60px;
+      padding: 70px 96px 42px;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      align-items: center;
+      align-items: flex-end;
+      gap: 32px;
     }
 
     .icon-grid {
       display: flex;
-      gap: 28px;
-      margin-top: 10px;
+      gap: 32px;
       flex-wrap: wrap;
-      justify-content: center;
-      width: 100%;
+      justify-content: flex-end;
     }
 
     .app-card {
-      width: 100px;
+      width: 120px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -159,27 +171,30 @@
     }
 
     .app-icon {
-      width: 70px;
-      height: 62px;
-      border-radius: 18px;
-      border: 2px solid #111;
+      width: 86px;
+      height: 76px;
+      border-radius: 24px;
+      border: 3px solid #111;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 26px;
-      font-weight: 700;
-      background: #fdfdfd;
-      box-shadow: 0 4px 0 #111;
+      font-weight: 600;
+      background: linear-gradient(180deg, #fff 0%, #e5e5e2 100%);
+      box-shadow: 0 5px 0 #111;
       transition:
         transform 0.18s ease,
         box-shadow 0.18s ease,
         background 0.18s ease;
+      position: relative;
+      overflow: hidden;
     }
 
     .app-label {
-      font-size: 13px;
-      letter-spacing: 0.08em;
+      font-size: 11px;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
+      font-weight: 500;
     }
 
     .app-card:hover .app-icon {
@@ -193,7 +208,87 @@
       box-shadow: 0 0 0 #111;
     }
 
-    /* 5) 하단 살짝 그림자/테두리 강조 */
+    .app-icon::before,
+    .app-icon::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .icon-folder::before {
+      width: 62px;
+      height: 40px;
+      border: 2px solid #111;
+      border-radius: 14px;
+      top: 24px;
+      background: linear-gradient(180deg, #fdfdfd 0%, #dededc 100%);
+    }
+
+    .icon-folder::after {
+      width: 30px;
+      height: 12px;
+      border: 2px solid #111;
+      border-bottom: none;
+      border-radius: 8px 8px 0 0;
+      top: 18px;
+      background: #ededeb;
+      left: calc(50% - 10px);
+      transform: none;
+    }
+
+    .icon-heart::before {
+      width: 42px;
+      height: 36px;
+      top: 24px;
+      background: transparent;
+      border: 2px solid #111;
+      border-radius: 12px;
+    }
+
+    .icon-heart::after {
+      top: 32px;
+      left: 50%;
+      width: 26px;
+      height: 22px;
+      background: transparent;
+      border: 2px solid #111;
+      border-top: none;
+      border-radius: 0 0 14px 14px;
+      transform: translateX(-50%);
+    }
+
+    .icon-figma {
+      background: #111;
+      color: #f5f5f5;
+      font-family: "IBM Plex Sans", sans-serif;
+    }
+
+    .icon-figma::before {
+      content: "F";
+      position: static;
+      transform: none;
+      font-size: 34px;
+      font-weight: 600;
+    }
+
+    .icon-mac::before {
+      width: 52px;
+      height: 38px;
+      border: 2px solid #111;
+      border-radius: 10px;
+      top: 20px;
+    }
+
+    .icon-mac::after {
+      width: 46px;
+      height: 6px;
+      border: 2px solid #111;
+      border-top: none;
+      border-radius: 0 0 10px 10px;
+      top: 56px;
+    }
+
     .frame-inner-shadow {
       position: absolute;
       inset: 0;
@@ -203,7 +298,128 @@
       z-index: 2;
     }
 
-    /* 반응형 (모바일 축소) */
+    .project-preview {
+      width: 100%;
+      max-width: 900px;
+      align-self: center;
+      background: linear-gradient(180deg, #fafafa 0%, #f0f0ee 100%);
+      border: 3px solid #111;
+      border-radius: 30px;
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.25);
+      padding: 24px 32px 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .preview-top {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .preview-close {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 2px solid #111;
+      background: transparent;
+      font-size: 20px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .preview-lines {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .preview-lines span {
+      display: block;
+      height: 2px;
+      background: #111;
+      opacity: 0.7;
+    }
+
+    .preview-body {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 32px;
+    }
+
+    .preview-sidebar {
+      border-right: 2px solid rgba(0, 0, 0, 0.2);
+      padding-right: 24px;
+    }
+
+    .preview-sidebar h3 {
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      margin-bottom: 16px;
+    }
+
+    .preview-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 14px;
+    }
+
+    .preview-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: rgba(0, 0, 0, 0.7);
+    }
+
+    .preview-list li.active {
+      color: #000;
+      font-weight: 500;
+    }
+
+    .preview-list li::before {
+      content: "";
+      width: 16px;
+      height: 12px;
+      border-radius: 4px;
+      border: 2px solid currentColor;
+    }
+
+    .preview-content h2 {
+      font-family: "Playfair Display", "Times New Roman", serif;
+      font-size: clamp(34px, 4vw, 48px);
+      margin-bottom: 16px;
+    }
+
+    .preview-content p {
+      font-size: 15px;
+      color: rgba(0, 0, 0, 0.8);
+      margin-bottom: 20px;
+      max-width: 520px;
+      line-height: 1.6;
+    }
+
+    .preview-shot {
+      width: 100%;
+      height: 180px;
+      border-radius: 18px;
+      border: 2px solid #111;
+      background: linear-gradient(180deg, #fdfdfd 0%, #d8d8d6 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .preview-shot::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(255, 255, 255, 0.4), transparent);
+      mix-blend-mode: screen;
+    }
+
     @media (max-width: 768px) {
       .frame {
         height: calc(100vh - 32px);
@@ -214,7 +430,7 @@
       }
 
       .brand {
-        font-size: 24px;
+        font-size: 28px;
       }
 
       .top-lines div {
@@ -224,11 +440,25 @@
       .main {
         padding: 40px 24px 32px;
         align-items: center;
-        justify-content: center;
       }
 
       .icon-grid {
-        gap: 24px;
+        justify-content: center;
+      }
+
+      .project-preview {
+        padding: 20px;
+      }
+
+      .preview-body {
+        grid-template-columns: 1fr;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        padding-top: 16px;
+      }
+
+      .preview-sidebar {
+        border-right: none;
+        padding-right: 0;
       }
     }
   </style>
@@ -237,7 +467,7 @@
   <div class="frame">
     <div class="frame-inner-shadow"></div>
 
-    <!-- 상단 바 -->
+    <!-- ?곷떒 諛?-->
     <header class="top-bar">
       <div>
         <div class="brand">
@@ -248,10 +478,10 @@
         </div>
       </div>
 
-      <div class="top-right">
-        <a href="mailto:kehlove09@gmail.com" class="top-icon">✉</a>
-        <div class="top-icon">▶</div>
-        <div class="top-icon">⟳</div>
+            <div class="top-right">
+        <a href="mailto:kehlove09@gmail.com" class="top-icon" aria-label="메일 보내기">✉</a>
+        <button class="top-icon" type="button" aria-label="인트로 재생">▶</button>
+        <button class="top-icon" type="button" aria-label="새로 고침">↺</button>
         <div class="clock" id="clock">--:--</div>
       </div>
     </header>
@@ -260,40 +490,76 @@
     <main class="main">
       <nav class="icon-grid">
         <a class="app-card" href="index.html">
-          <div class="app-icon">▶</div>
+          <div class="app-icon icon-folder"></div>
           <div class="app-label">Back</div>
         </a>
         <a class="app-card" href="https://octet-rule.vercel.app/">
-          <div class="app-icon">📁</div>    
+          <div class="app-icon icon-folder"></div>
           <div class="app-label">Octet-rule</div>
         </a>
         <a class="app-card" href="https://presidium-systems.vercel.app/">
-          <div class="app-icon">📁</div>
+          <div class="app-icon icon-folder"></div>
           <div class="app-label">Presidium Systems</div>
         </a>
         <a class="app-card" href="https://code-chache.vercel.app/">
-          <div class="app-icon">📁</div>
+          <div class="app-icon icon-figma"></div>
           <div class="app-label">Code-chache</div>
         </a>
         <a class="app-card" href="https://email-cleaner-chi.vercel.app/">
-          <div class="app-icon">📁</div>
+          <div class="app-icon icon-heart"></div>
           <div class="app-label">Email-cleaner</div>
         </a>
         <a class="app-card" href="https://subscription-d-day.vercel.app/">
-          <div class="app-icon">📁</div>
+          <div class="app-icon icon-folder"></div>
           <div class="app-label">subscription-d-day</div>
         </a>
         <a class="app-card" href="https://seatpicker.vercel.app/">
-          <div class="app-icon">📁</div>
+          <div class="app-icon icon-mac"></div>
           <div class="app-label">seatpicker</div>
         </a>
-
       </nav>
+
+      <section class="project-preview">
+        <header class="preview-top">
+          <button class="preview-close" type="button" aria-label="창 닫기">×</button>
+          <div class="preview-lines">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="clock" aria-hidden="true">PM 11:00</div>
+        </header>
+
+        <div class="preview-body">
+          <aside class="preview-sidebar">
+            <h3>PROYECTOS WEB</h3>
+            <ul class="preview-list">
+              <li class="active">Coduck</li>
+              <li>Delirium</li>
+              <li>MadMusic</li>
+              <li>Hysteria</li>
+              <li>Subscription</li>
+              <li>Seat Picker</li>
+            </ul>
+          </aside>
+
+          <div class="preview-content">
+            <h2>CoDuck</h2>
+            <p>
+              유지 보수가 편안한 올인원 웹 플랫폼을 빈티지 북 디자인처럼 재해석한 프로젝트입니다.
+              Trello 워크플로우, Stripe 결제, Notion 기반 문서화를 엮어 작은 팀도 전문 스튜디오처럼
+              운영할 수 있는 환경을 만들었습니다.
+            </p>
+            <div class="preview-shot" aria-hidden="true"></div>
+          </div>
+        </div>
+      </section>
     </main>
   </div>
 
   <script>
-    // 간단한 시계 (오전/오후 + 시:분)
+    // 媛꾨떒???쒓퀎 (?ㅼ쟾/?ㅽ썑 + ??遺?
     function updateClock() {
       const el = document.getElementById("clock");
       const now = new Date();
@@ -309,3 +575,6 @@
   </script>
 </body>
 </html>
+
+
+
