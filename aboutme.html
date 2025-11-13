@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>Presidium – Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    /* 1) 전체 레이아웃 기본 */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f3f3f3;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      color: #111;
+    }
+
+    .frame {
+      width: min(1200px, 100vw - 40px);
+      height: min(650px, 100vh - 40px);
+      background: #f8f8f8;
+      border-radius: 20px;
+      border: 6px solid #111;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* 2) 모눈 배경 (텍스처 느낌) */
+    .frame::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+      background-size: 16px 16px;
+      opacity: 0.9;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* 3) 상단 바 */
+    .top-bar {
+      position: relative;
+      z-index: 1;
+      padding: 18px 28px 10px 28px;
+      border-bottom: 2px solid #111;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      background: #fdfdfd;
+    }
+
+    .brand {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+
+    .brand span:last-child {
+      font-weight: 400;
+    }
+
+    .top-lines {
+      margin-top: 6px;
+    }
+
+    .top-lines div {
+      height: 2px;
+      background: #111;
+      margin-bottom: 3px;
+      width: 360px;
+      max-width: 45vw;
+    }
+
+    .top-lines div:nth-child(1) { opacity: 0.95; }
+    .top-lines div:nth-child(2) { opacity: 0.8; }
+    .top-lines div:nth-child(3) { opacity: 0.65; }
+    .top-lines div:nth-child(4) { opacity: 0.5; }
+    .top-lines div:nth-child(5) { opacity: 0.35; }
+
+    .top-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+    }
+
+    .top-icon {
+      width: 26px;
+      height: 22px;
+      border: 2px solid #111;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      box-shadow: 0 2px 0 #111;
+      background: #fdfdfd;
+    }
+
+    .top-icon:active {
+      transform: translateY(2px);
+      box-shadow: 0 0 0 #111;
+    }
+
+    .clock {
+      min-width: 70px;
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* 4) 메인 영역 */
+    .main {
+      flex: 1;
+      position: relative;
+      z-index: 1;
+      padding: 70px 80px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-end;
+    }
+
+    .icon-grid {
+      display: flex;
+      gap: 40px;
+      margin-top: 10px;
+    }
+
+    .app-card {
+      width: 120px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      user-select: none;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .app-icon {
+      width: 90px;
+      height: 80px;
+      border-radius: 18px;
+      border: 3px solid #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      font-weight: 700;
+      background: #fdfdfd;
+      box-shadow: 0 4px 0 #111;
+      transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        background 0.18s ease;
+    }
+
+    .app-label {
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .app-card:hover .app-icon {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 0 #111;
+      background: #f0f0f0;
+    }
+
+    .app-card:active .app-icon {
+      transform: translateY(2px);
+      box-shadow: 0 0 0 #111;
+    }
+
+    /* 5) 하단 살짝 그림자/테두리 강조 */
+    .frame-inner-shadow {
+      position: absolute;
+      inset: 0;
+      border-radius: 18px;
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* 반응형 (모바일 축소) */
+    @media (max-width: 768px) {
+      .frame {
+        height: calc(100vh - 32px);
+      }
+
+      .top-bar {
+        padding: 14px 16px 8px;
+      }
+
+      .brand {
+        font-size: 24px;
+      }
+
+      .top-lines div {
+        width: 220px;
+      }
+
+      .main {
+        padding: 40px 24px 32px;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .icon-grid {
+        gap: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <div class="frame-inner-shadow"></div>
+
+    <!-- 상단 바 -->
+    <header class="top-bar">
+      <div>
+        <div class="brand">
+          <span>Presidium</span><span> Studio</span>
+        </div>
+        <div class="top-lines">
+          <div></div><div></div><div></div><div></div><div></div>
+        </div>
+      </div>
+
+      <div class="top-right">
+        <a href="mailto:kehlove09@gmail.com" class="top-icon">✉</a>
+        <!-- <div class="top-icon" >✉</div> -->
+        <div class="top-icon">▶</div>
+        <div class="top-icon">⟳</div>
+        <div class="clock" id="clock">--:--</div>
+      </div>
+    </header>
+
+    <!-- 메인 컨텐츠 -->
+    <main class="main">
+      <nav class="icon-grid">
+        <a class="app-card" href="index.html">
+          <div class="app-icon">▶</div>
+          <div class="app-label">Back</div>
+        </a>
+        <a class="app-card" href="aboutme.html">
+          <div class="app-icon">💻</div>
+          <div class="app-label">Introduction</div>
+        </a>
+        <a class="app-card" href="www.linkedin.com/in/은호-김-3077b8380">
+          <div class="app-icon"><img src="/image/linkedln.png" alt="Linkedln"></div>
+          <div class="app-label">Linkedln</div>
+        </a>
+        <a class="app-card" href="https://honored-innocent-624.notion.site/Eunho-Kim-XR-VR-Developer-Portpolio-26a0a67a58178094953cecb7e3689249?source=copy_link">
+          <div class="app-icon"><img src="/image/Notion.png" alt="Notion"></div>
+          <div class="app-label">Notion</div>
+        </a>
+      </nav>
+    </main>
+  </div>
+
+  
+  
+  <script>
+    // 간단한 시계 (오전/오후 + 시:분)
+    function updateClock() {
+      const el = document.getElementById("clock");
+      const now = new Date();
+      let h = now.getHours();
+      const m = now.getMinutes().toString().padStart(2, "0");
+      const isPM = h >= 12;
+      if (h === 0) h = 12;
+      else if (h > 12) h -= 12;
+      el.textContent = (isPM ? "PM " : "AM ") + h + ":" + m;
+    }
+    updateClock();
+    setInterval(updateClock, 10_000);
+  </script>
+</body>
+</html>
