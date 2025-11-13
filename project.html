@@ -197,7 +197,8 @@
       font-weight: 500;
     }
 
-    .app-card:hover .app-icon {
+    .app-card:hover .app-icon,
+    .app-card.is-active .app-icon {
       transform: translateY(-4px);
       box-shadow: 0 8px 0 #111;
       background: #f0f0f0;
@@ -310,6 +311,14 @@
       display: flex;
       flex-direction: column;
       gap: 20px;
+      opacity: 0.75;
+      transform: translateY(10px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .project-preview.active {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .preview-top {
@@ -364,34 +373,54 @@
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
       font-size: 14px;
     }
 
-    .preview-list li {
+    .preview-list li button {
+      width: 100%;
+      padding: 6px 12px;
+      border-radius: 14px;
+      border: 1px solid transparent;
+      background: transparent;
+      text-align: left;
+      font: inherit;
+      color: rgba(0, 0, 0, 0.6);
+      cursor: pointer;
+      transition: transform 0.15s ease, border-color 0.15s ease, color 0.15s ease;
       display: flex;
       align-items: center;
       gap: 10px;
-      color: rgba(0, 0, 0, 0.7);
     }
 
-    .preview-list li.active {
-      color: #000;
-      font-weight: 500;
-    }
-
-    .preview-list li::before {
+    .preview-list li button::before {
       content: "";
       width: 16px;
       height: 12px;
       border-radius: 4px;
       border: 2px solid currentColor;
+      display: inline-block;
+    }
+
+    .preview-list li.active button,
+    .preview-list li button:hover {
+      color: #000;
+      border-color: rgba(0, 0, 0, 0.4);
+      transform: translateX(4px);
     }
 
     .preview-content h2 {
       font-family: "Playfair Display", "Times New Roman", serif;
       font-size: clamp(34px, 4vw, 48px);
       margin-bottom: 16px;
+    }
+
+    .preview-tags {
+      font-size: 13px;
+      letter-spacing: 0.2em;
+      color: rgba(0, 0, 0, 0.6);
+      margin-bottom: 10px;
+      text-transform: uppercase;
     }
 
     .preview-content p {
@@ -402,6 +431,48 @@
       line-height: 1.6;
     }
 
+    .preview-actions {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      margin-top: 6px;
+    }
+
+    .preview-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 2px solid #111;
+      border-radius: 999px;
+      padding: 8px 18px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 4px 0 #111;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .preview-link span {
+      font-size: 11px;
+    }
+
+    .preview-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 0 #111;
+    }
+
+    .preview-link:active {
+      transform: translateY(1px);
+      box-shadow: 0 2px 0 #111;
+    }
+
+    .preview-link.is-hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
     .preview-shot {
       width: 100%;
       height: 180px;
@@ -410,6 +481,13 @@
       background: linear-gradient(180deg, #fdfdfd 0%, #d8d8d6 100%);
       position: relative;
       overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      padding: 16px;
+      font-size: 18px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(0, 0, 0, 0.75);
     }
 
     .preview-shot::after {
@@ -418,6 +496,11 @@
       inset: 0;
       background-image: linear-gradient(rgba(255, 255, 255, 0.4), transparent);
       mix-blend-mode: screen;
+    }
+
+    .preview-shot span {
+      position: relative;
+      z-index: 1;
     }
 
     @media (max-width: 768px) {
@@ -493,27 +576,81 @@
           <div class="app-icon icon-folder"></div>
           <div class="app-label">Back</div>
         </a>
-        <a class="app-card" href="https://octet-rule.vercel.app/">
+        <a
+          class="app-card"
+          href="https://octet-rule.vercel.app/"
+          data-project="octet"
+          data-title="Octet Rule Lab"
+          data-tags="Interactive · Next.js"
+          data-description="옥텟 규칙을 직관적으로 익힐 수 있도록 전자를 드래그해 궤도를 채워 보는 실험실 인터페이스입니다."
+          data-preview="전자 궤도 시뮬레이터"
+          data-list="Octet Rule"
+        >
           <div class="app-icon icon-folder"></div>
           <div class="app-label">Octet-rule</div>
         </a>
-        <a class="app-card" href="https://presidium-systems.vercel.app/">
+        <a
+          class="app-card"
+          href="https://presidium-systems.vercel.app/"
+          data-project="presidium"
+          data-title="Presidium Systems"
+          data-tags="Dashboard · Web"
+          data-description="브랜드 자산과 실험 프로젝트를 한 화면에서 관리하는 내부 운영 패널로, 빈티지 모니터 UI에서 영감을 받았습니다."
+          data-preview="운영 패널"
+          data-list="Presidium Systems"
+        >
           <div class="app-icon icon-folder"></div>
           <div class="app-label">Presidium Systems</div>
         </a>
-        <a class="app-card" href="https://code-chache.vercel.app/">
+        <a
+          class="app-card"
+          href="https://code-chache.vercel.app/"
+          data-project="code"
+          data-title="Code Chache"
+          data-tags="Design · Figma"
+          data-description="코드 스니펫과 UI 패턴을 수집해 카탈로그처럼 훑어볼 수 있는 미니 레퍼런스 허브입니다."
+          data-preview="스니펫 보관소"
+          data-list="Code Chache"
+        >
           <div class="app-icon icon-figma"></div>
           <div class="app-label">Code-chache</div>
         </a>
-        <a class="app-card" href="https://email-cleaner-chi.vercel.app/">
+        <a
+          class="app-card"
+          href="https://email-cleaner-chi.vercel.app/"
+          data-project="email"
+          data-title="Email Cleaner"
+          data-tags="Automation · React"
+          data-description="구독 이메일을 카테고리별로 분류하고 원클릭으로 정리할 수 있는 자동화 도구입니다."
+          data-preview="Inbox Detox"
+          data-list="Email Cleaner"
+        >
           <div class="app-icon icon-heart"></div>
           <div class="app-label">Email-cleaner</div>
         </a>
-        <a class="app-card" href="https://subscription-d-day.vercel.app/">
+        <a
+          class="app-card"
+          href="https://subscription-d-day.vercel.app/"
+          data-project="subscription"
+          data-title="Subscription D-Day"
+          data-tags="Calendar · Vanilla JS"
+          data-description="각종 구독 결제일을 타임라인으로 보여 주고 남은 일수를 계산해 주는 대시보드입니다."
+          data-preview="만료 카운터"
+          data-list="Subscription"
+        >
           <div class="app-icon icon-folder"></div>
           <div class="app-label">subscription-d-day</div>
         </a>
-        <a class="app-card" href="https://seatpicker.vercel.app/">
+        <a
+          class="app-card"
+          href="https://seatpicker.vercel.app/"
+          data-project="seatpicker"
+          data-title="Seat Picker"
+          data-tags="UI · Accessibility"
+          data-description="극장 좌석을 2D 그리드에서 살펴보고 최적의 시야를 찾도록 돕는 예약 인터페이스입니다."
+          data-preview="시트 맵"
+          data-list="Seat Picker"
+        >
           <div class="app-icon icon-mac"></div>
           <div class="app-label">seatpicker</div>
         </a>
@@ -534,32 +671,29 @@
         <div class="preview-body">
           <aside class="preview-sidebar">
             <h3>PROYECTOS WEB</h3>
-            <ul class="preview-list">
-              <li class="active">Coduck</li>
-              <li>Delirium</li>
-              <li>MadMusic</li>
-              <li>Hysteria</li>
-              <li>Subscription</li>
-              <li>Seat Picker</li>
-            </ul>
+            <ul class="preview-list"></ul>
           </aside>
 
           <div class="preview-content">
-            <h2>CoDuck</h2>
-            <p>
-              유지 보수가 편안한 올인원 웹 플랫폼을 빈티지 북 디자인처럼 재해석한 프로젝트입니다.
-              Trello 워크플로우, Stripe 결제, Notion 기반 문서화를 엮어 작은 팀도 전문 스튜디오처럼
-              운영할 수 있는 환경을 만들었습니다.
+            <h2 class="preview-title">프로젝트를 선택하세요</h2>
+            <p class="preview-tags">Select A Folder</p>
+            <p class="preview-description">
+              오른쪽 폴더를 클릭하면 이 영역에 세부 설명과 데모 링크가 나타납니다.
             </p>
-            <div class="preview-shot" aria-hidden="true"></div>
+            <div class="preview-shot" aria-hidden="true"><span>Presidium Studio</span></div>
+            <div class="preview-actions">
+              <a class="preview-link" href="#" target="_blank" rel="noopener">
+                Visit Site <span>↗</span>
+              </a>
+            </div>
           </div>
         </div>
       </section>
     </main>
   </div>
 
-  <script>
-    // 媛꾨떒???쒓퀎 (?ㅼ쟾/?ㅽ썑 + ??遺?
+    <script>
+    // 간단한 시계 (오전/오후 + 분단위)
     function updateClock() {
       const el = document.getElementById("clock");
       const now = new Date();
@@ -572,6 +706,71 @@
     }
     updateClock();
     setInterval(updateClock, 10_000);
+
+    // 프로젝트 미리보기 인터랙션
+    (function initProjectPreview() {
+      const preview = document.querySelector(".project-preview");
+      if (!preview) return;
+
+      const cards = Array.from(document.querySelectorAll(".app-card[data-project]"));
+      if (!cards.length) return;
+
+      const previewTitle = preview.querySelector(".preview-title");
+      const previewTags = preview.querySelector(".preview-tags");
+      const previewDescription = preview.querySelector(".preview-description");
+      const previewShot = preview.querySelector(".preview-shot");
+      const previewLink = preview.querySelector(".preview-link");
+      const previewList = preview.querySelector(".preview-list");
+
+      previewLink.classList.add("is-hidden");
+      previewList.innerHTML = "";
+
+      const createListEntry = (card) => {
+        const li = document.createElement("li");
+        const button = document.createElement("button");
+        button.type = "button";
+        button.dataset.projectRef = card.dataset.project;
+        button.textContent = card.dataset.list || card.dataset.title || card.dataset.project;
+        button.addEventListener("click", () => selectProject(card));
+        li.appendChild(button);
+        previewList.appendChild(li);
+      };
+
+      const selectProject = (card) => {
+        cards.forEach((c) => c.classList.toggle("is-active", c === card));
+        preview.classList.add("active");
+
+        previewTitle.textContent = card.dataset.title || "Untitled Project";
+        previewTags.textContent = card.dataset.tags || "";
+        previewDescription.textContent =
+          card.dataset.description || "프로젝트 설명이 아직 준비되지 않았습니다.";
+
+        const previewText = card.dataset.preview || card.dataset.title || "";
+        previewShot.innerHTML = previewText ? `<span>${previewText}</span>` : "";
+
+        if (card.href && card.getAttribute("href") !== "#") {
+          previewLink.href = card.href;
+          previewLink.classList.remove("is-hidden");
+        } else {
+          previewLink.classList.add("is-hidden");
+        }
+
+        previewList.querySelectorAll("li").forEach((li) => {
+          const button = li.querySelector("button");
+          const isActive = button?.dataset.projectRef === card.dataset.project;
+          li.classList.toggle("active", Boolean(isActive));
+        });
+      };
+
+      cards.forEach(createListEntry);
+
+      cards.forEach((card) => {
+        card.addEventListener("click", (event) => {
+          event.preventDefault();
+          selectProject(card);
+        });
+      });
+    })();
   </script>
 </body>
 </html>
