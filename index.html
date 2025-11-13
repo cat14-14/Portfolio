@@ -5,77 +5,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Eunho Kim · Retro Portfolio OS</title>
   <link rel="stylesheet" href="css/retro.css" />
+  <script defer src="js/app.js"></script>
 </head>
 <body>
-  <div class="browser-shell">
-    <div class="browser-tabs">
-      <span class="browser-tab is-current">공부</span>
-      <span class="browser-tab">역학</span>
-      <span class="browser-tab">성공3</span>
-      <span class="browser-tab">백준</span>
-      <span class="browser-tab">VR</span>
-      <span class="browser-tab">성공</span>
-      <span class="browser-tab">성공2</span>
-      <span class="browser-tab">코딩2</span>
-      <span class="browser-tab">Meta Horizon</span>
-      <span class="browser-tab">부산소마고</span>
-      <span class="browser-tab">도서관</span>
-      <span class="browser-tab">유니티</span>
-    </div>
-
-    <section class="desktop-shell">
-      <header class="desktop-top">
-        <div>
-          <div class="brandmark">
-            <span>Eunho</span><span>Kim</span>
+  <div class="workspace">
+    <section class="hero-shell" id="home">
+      <div class="hero-content">
+        <header class="hero-header">
+          <div>
+            <p class="hero-tagline">XR · VR STUDIO</p>
+            <div class="brandmark">Eunho <span>Kim</span></div>
+            <div class="top-lines">
+              <span class="top-line"></span>
+              <span class="top-line"></span>
+              <span class="top-line"></span>
+              <span class="top-line"></span>
+            </div>
           </div>
-          <div class="top-lines">
-            <span class="top-line"></span>
-            <span class="top-line"></span>
-            <span class="top-line"></span>
-            <span class="top-line"></span>
-            <span class="top-line"></span>
+          <div class="top-right">
+            <button class="status-icon" type="button" data-open="about" aria-label="About 창 열기">
+              <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9"></circle>
+                <path d="M12 8v.01M11 12h1v4h1"></path>
+              </svg>
+            </button>
+            <button class="status-icon" type="button" data-open="projects" aria-label="Projects 창 열기">
+              <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="16" rx="2"></rect>
+                <path d="M3 10h18"></path>
+              </svg>
+            </button>
+            <div class="clock" data-clock>--:--</div>
           </div>
-        </div>
+        </header>
 
-        <div class="top-right">
-          <button class="status-icon" aria-label="사운드">
-            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 10h3l4-4v12l-4-4H4z"></path>
-              <path d="M16 9a3 3 0 0 1 0 6"></path>
-              <path d="M18.5 6.8a6 6 0 0 1 0 10.4"></path>
-            </svg>
-          </button>
-          <a class="status-icon" href="mailto:kehlove09@gmail.com" aria-label="메일">
-            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="6" width="18" height="12" rx="2"></rect>
-              <path d="M4 8l8 6 8-6"></path>
-            </svg>
-          </a>
-          <button class="status-icon" aria-label="연결 상태">
-            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M2 10c4.8-4 15.2-4 20 0"></path>
-              <path d="M5 13c3.2-3 10.8-3 14 0"></path>
-              <path d="M8 16c1.6-2 6.4-2 8 0"></path>
-              <circle cx="12" cy="19" r="1.4"></circle>
-            </svg>
-          </button>
-          <div class="clock" id="clock">--:--</div>
-        </div>
-      </header>
-
-      <main class="desktop-main">
-        <nav class="icon-grid">
-          <a class="app-card" href="project.html">
+        <div class="icon-grid" role="navigation" aria-label="앱 바로가기">
+          <button class="app-card" type="button" data-open="projects" aria-controls="projects-window">
             <div class="app-icon">
               <svg class="icon-svg" viewBox="0 0 48 48" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 16h38v21H5z"></path>
-                <path d="M5 16l7-7h12l6 7"></path>
+                <path d="M6 18h36v20H6z"></path>
+                <path d="M6 18l8-8h12l6 8"></path>
               </svg>
             </div>
             <div class="app-label">Projects</div>
-          </a>
-          <a class="app-card" href="Introduction.html">
+          </button>
+
+          <button class="app-card" type="button" data-open="designs" aria-controls="designs-window">
             <div class="app-icon">
               <svg class="icon-svg" viewBox="0 0 48 48" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="8" y="8" width="12" height="12"></rect>
@@ -84,17 +59,19 @@
                 <rect x="28" y="28" width="12" height="12"></rect>
               </svg>
             </div>
-            <div class="app-label">Designs</div>
-          </a>
-          <a class="app-card" href="https://www.linkedin.com/in/eunho-kim-xr" target="_blank" rel="noopener noreferrer">
+            <div class="app-label">Design Notes</div>
+          </button>
+
+          <button class="app-card" type="button" data-open="social" aria-controls="social-window">
             <div class="app-icon">
               <svg class="icon-svg" viewBox="0 0 48 48" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M24 36l-9-9a6 6 0 0 1 0-8 6 6 0 0 1 8.8-.2L24 20l.2-.2a6 6 0 0 1 8.8.2 6 6 0 0 1 0 8z"></path>
               </svg>
             </div>
             <div class="app-label">Social Life</div>
-          </a>
-          <a class="app-card" href="aboutme.html">
+          </button>
+
+          <button class="app-card" type="button" data-open="about" aria-controls="about-window">
             <div class="app-icon">
               <svg class="icon-svg" viewBox="0 0 48 48" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="10" y="8" width="28" height="20" rx="4"></rect>
@@ -104,24 +81,288 @@
               </svg>
             </div>
             <div class="app-label">About Me</div>
-          </a>
-        </nav>
-      </main>
-    </section>
-  </div>
+          </button>
+        </div>
 
-  <script>
-    const clockEl = document.getElementById("clock");
-    const formatClock = () => {
-      const now = new Date();
-      const hour = now.getHours();
-      const minutes = now.getMinutes().toString().padStart(2, "0");
-      const isAm = hour < 12;
-      const displayHour = hour % 12 === 0 ? 12 : hour % 12;
-      clockEl.textContent = `${isAm ? "AM" : "PM"} ${displayHour}:${minutes}`;
-    };
-    formatClock();
-    setInterval(formatClock, 10_000);
-  </script>
+        <p class="scroll-hint">CLICK ICON · SCROLL DOWN</p>
+      </div>
+    </section>
+
+    <div class="window-stack">
+      <article class="window retro-window" id="projects-window" data-window="projects" aria-hidden="true">
+        <header class="window-top">
+          <button class="window-close" type="button" data-close="projects" aria-label="Projects 창 닫기">X</button>
+          <div class="window-lines">
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <div class="window-title">PROJECT ARCHIVE</div>
+        </header>
+
+        <div class="window-body">
+          <div class="window-section">
+            <p class="window-tagline">FEATURED</p>
+            <p>
+              산업용 VR 유지보수부터 인터랙티브 교육 실험까지, 실제 사용자를 대상으로 한 프로젝트들을 모았습니다.
+              각 폴더는 작업 내역과 프로토타입을 연결합니다.
+            </p>
+          </div>
+
+          <div class="project-grid">
+            <article class="project-card">
+              <span class="badge">COMMERCIAL</span>
+              <h4>CoDuck 유지 보수 플랫폼</h4>
+              <p>
+                소규모 비즈니스가 웹 유지 보수 요청을 티켓으로 전송하면 24시간 내 해결하는 구독형 서비스입니다.
+                Trello 자동화와 Stripe 반복 결제를 직접 설계했습니다.
+              </p>
+              <div class="chip-list">
+                <span class="chip">WordPress</span>
+                <span class="chip">Elementor</span>
+                <span class="chip">Stripe</span>
+              </div>
+              <a class="retro-link primary" href="https://honored-innocent-624.notion.site/Eunho-Kim-XR-VR-Developer-Portpolio-26a0a67a58178094953cecb7e3689249?source=copy_link" target="_blank" rel="noopener noreferrer">
+                View Case
+                <svg viewBox="0 0 16 16">
+                  <path d="M4 12l8-8"></path>
+                  <path d="M7 4h5v5"></path>
+                </svg>
+              </a>
+            </article>
+
+            <article class="project-card">
+              <span class="badge">XR</span>
+              <h4>Presidium Systems</h4>
+              <p>
+                유지보수팀이 장비 상태를 실시간으로 확인하는 대시보드입니다. 레트로 OS 스타일을 적용해
+                복잡한 데이터를 안정감 있게 시각화했습니다.
+              </p>
+              <div class="chip-list">
+                <span class="chip">Dashboard</span>
+                <span class="chip">Realtime</span>
+                <span class="chip">UX</span>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <span class="badge">EXPERIMENT</span>
+              <h4>Octet Rule Lab</h4>
+              <p>
+                AR 카드와 웹 브라우저를 결합해 학생이 직접 분자를 조립할 수 있는 화학 실험실을 제작했습니다.
+                제스처에 따라 결합 상태가 즉시 피드백 됩니다.
+              </p>
+              <div class="chip-list">
+                <span class="chip">Next.js</span>
+                <span class="chip">WebXR</span>
+                <span class="chip">Education</span>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <span class="badge">UI</span>
+              <h4>Seat Picker</h4>
+              <p>
+                극장 좌석 선택을 키보드와 스크린 리더로도 쉽게 조작할 수 있도록 만든 접근성 중심 인터페이스입니다.
+              </p>
+              <div class="chip-list">
+                <span class="chip">Accessibility</span>
+                <span class="chip">Semantic</span>
+                <span class="chip">Animation</span>
+              </div>
+            </article>
+          </div>
+        </div>
+        <div class="window-footer">↑ X 버튼으로 닫을 수 있습니다</div>
+      </article>
+
+      <article class="window retro-window" id="designs-window" data-window="designs" aria-hidden="true">
+        <header class="window-top">
+          <button class="window-close" type="button" data-close="designs" aria-label="Design 창 닫기">X</button>
+          <div class="window-lines">
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <div class="window-title">DESIGN NOTES</div>
+        </header>
+
+        <div class="window-body two-column">
+          <section class="info-card about-text">
+            <h3>PRINCIPLES</h3>
+            <p>
+              모눈 배경과 활자, 옛 컴퓨터의 완만한 곡선을 현대 XR 경험에 옮겨 적습니다.
+              물성을 느낄 수 있는 UI를 만들 때 사람들이 기술을 편안하게 느끼는 것을 봤습니다.
+            </p>
+            <p>
+              화면 한 장도 작은 전시처럼 보이도록 요소 간 간격과 여백을 끝까지 다듬습니다.
+            </p>
+          </section>
+
+          <section class="info-card">
+            <h3>TOOLSET</h3>
+            <div class="chip-list">
+              <span class="chip">Figma</span>
+              <span class="chip">Blender</span>
+              <span class="chip">After Effects</span>
+              <span class="chip">Spline</span>
+              <span class="chip">Notion</span>
+              <span class="chip">Unity</span>
+            </div>
+          </section>
+
+          <section class="info-card">
+            <h3>RESEARCH</h3>
+            <ul>
+              <li>Retro Web OS · Rafa Heras 스타일 재현</li>
+              <li>XR 공간에서 적용 가능한 타이포 리듬</li>
+              <li>Grid texture와 Serif 조합 실험</li>
+            </ul>
+          </section>
+
+          <section class="info-card">
+            <h3>MOCKS</h3>
+            <div class="design-grid">
+              <article class="design-card">
+                <small>XR STUDY</small>
+                <h4>Immersive Whiteboard</h4>
+                <p>팀 브레인스토밍을 위한 VR 화이트보드. 모눈지 질감과 타자기 서체를 입혔습니다.</p>
+              </article>
+              <article class="design-card">
+                <small>BRAND</small>
+                <h4>Presidium Badge</h4>
+                <p>와이어프레임과 모노그램을 섞어 빈티지한 스티커 세트를 제작했습니다.</p>
+              </article>
+              <article class="design-card">
+                <small>UI</small>
+                <h4>Library Terminal</h4>
+                <p>디지털 도서관 단말기의 인터페이스를 Playfair 서체와 픽셀 아이콘으로 표현했습니다.</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="note-card">
+            선과 점, 텍스처는 단순 장식이 아니라 사용자의 마음을 안정시키는 안전장치입니다.
+            이 창은 그런 실험을 기록하는 스케치북입니다.
+          </section>
+        </div>
+      </article>
+
+      <article class="window retro-window" id="social-window" data-window="social" aria-hidden="true">
+        <header class="window-top">
+          <button class="window-close" type="button" data-close="social" aria-label="Social 창 닫기">X</button>
+          <div class="window-lines">
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <div class="window-title">SOCIAL LIFE</div>
+        </header>
+
+        <div class="window-body two-column">
+          <section class="info-card">
+            <h3>CONTACT</h3>
+            <ul>
+              <li><a href="mailto:kehlove09@gmail.com">kehlove09@gmail.com</a></li>
+              <li><a href="https://www.linkedin.com/in/eunho-kim-xr" target="_blank" rel="noopener noreferrer">LinkedIn · @eunho-kim-xr</a></li>
+              <li><a href="https://honored-innocent-624.notion.site/Eunho-Kim-XR-VR-Developer-Portpolio-26a0a67a58178094953cecb7e3689249?source=copy_link" target="_blank" rel="noopener noreferrer">Notion · 작업 다이어리</a></li>
+            </ul>
+          </section>
+
+          <section class="info-card">
+            <h3>COMMUNITY</h3>
+            <ul>
+              <li>Unity XR 워크숍 진행 · 2024~</li>
+              <li>부산소마고 메타버스 연구 동아리 리드</li>
+              <li>XR Creator meetup 운영진</li>
+            </ul>
+          </section>
+
+          <section class="info-card">
+            <h3>CHANNELS</h3>
+            <div class="social-links">
+              <a class="social-link" href="https://www.linkedin.com/in/eunho-kim-xr" target="_blank" rel="noopener noreferrer">
+                <span>LINKEDIN</span>
+                <strong>연구 & 커리어 업데이트</strong>
+              </a>
+              <a class="social-link" href="https://honored-innocent-624.notion.site/Eunho-Kim-XR-VR-Developer-Portpolio-26a0a67a58178094953cecb7e3689249?source=copy_link" target="_blank" rel="noopener noreferrer">
+                <span>NOTION</span>
+                <strong>프로젝트 노트 & 다이어리</strong>
+              </a>
+              <a class="social-link" href="mailto:kehlove09@gmail.com">
+                <span>EMAIL</span>
+                <strong>콜라보 · 강의 문의</strong>
+              </a>
+            </div>
+          </section>
+        </div>
+      </article>
+
+      <article class="window retro-window" id="about-window" data-window="about" aria-hidden="true">
+        <header class="window-top">
+          <button class="window-close" type="button" data-close="about" aria-label="About 창 닫기">X</button>
+          <div class="window-lines">
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <div class="window-title">ABOUT ME</div>
+        </header>
+
+        <div class="window-body two-column">
+          <section class="info-card about-text">
+            <h3>FOCUS</h3>
+            <p>
+              XR · VR 시뮬레이션과 인터랙션 설계를 즐기는 개발자 김은호입니다.
+              레트로 컴퓨터의 감성을 빌려 사람들이 기술을 보다 친근하게 느끼도록 만드는 것이 제 작업의 목표입니다.
+            </p>
+            <p>
+              공간 UX, 인터랙티브 시각화, 몰입형 교육 도구를 설계하며 Unity, Blender, WebXR를 넘나듭니다.
+            </p>
+          </section>
+
+          <section class="info-card">
+            <h3>NOW</h3>
+            <ul>
+              <li>Presidium Studio · XR/VR Developer</li>
+              <li>부산소마고 3학년, 메타버스 연구</li>
+              <li>커뮤니티 강연: Unity XR 워크숍</li>
+            </ul>
+          </section>
+
+          <section class="info-card">
+            <h3>STACK</h3>
+            <div class="chip-list">
+              <span class="chip">Unity</span>
+              <span class="chip">C#</span>
+              <span class="chip">WebXR</span>
+              <span class="chip">Three.js</span>
+              <span class="chip">Blender</span>
+              <span class="chip">Python</span>
+              <span class="chip">Notion</span>
+            </div>
+          </section>
+
+          <section class="info-card">
+            <h3>JOURNEY</h3>
+            <div class="timeline">
+              <div class="timeline-entry">
+                <h4>2025 · XR Creator</h4>
+                <span>Presidium Studio</span>
+                <p>산업용 장비 교육용 디지털 트윈을 구축하고 유지보수용 XR 툴킷을 제작했습니다.</p>
+              </div>
+              <div class="timeline-entry">
+                <h4>2024 · Student Research</h4>
+                <span>부산소마고</span>
+                <p>WebXR 연구 동아리를 이끌며 메타버스 기반 협업 툴을 만들었습니다.</p>
+              </div>
+              <div class="timeline-entry">
+                <h4>2023 · Media Art</h4>
+                <span>Independent</span>
+                <p>제스처와 사운드로 장면이 변하는 인터랙티브 설치를 전시했습니다.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="note-card">
+            슬라이드 한 장보다 살아 있는 공간이 더 많은 이야기를 합니다.
+            이 사이트는 그런 감각을 담기 위한 개인 OS 입니다.
+          </section>
+        </div>
+      </article>
+    </div>
+  </div>
 </body>
 </html>
