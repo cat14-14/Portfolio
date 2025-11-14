@@ -1,95 +1,101 @@
 const clockElements = document.querySelectorAll("[data-clock]");
-const openButtons = document.querySelectorAll("[data-open]");
-const closeButtons = document.querySelectorAll("[data-close]");
-const windowLayer = document.querySelector(".window-stack");
+const openButtons = document.querySelectorAll("[data-window-target]");
+const closeButtons = document.querySelectorAll("[data-window-close]");
+const windowLayer = document.querySelector("[data-window-layer]");
+const panels = document.querySelectorAll(".window-panel");
 
-const formatClock = () => {
+const setClock = () => {
   const now = new Date();
   let hour = now.getHours();
   const minutes = now.getMinutes().toString().padStart(2, "0");
   const period = hour < 12 ? "AM" : "PM";
   hour = hour % 12 === 0 ? 12 : hour % 12;
   const value = `${period} ${hour}:${minutes}`;
-  clockElements.forEach((el) => {
-    el.textContent = value;
-  });
+  clockElements.forEach((el) => (el.textContent = value));
 };
 
-const updateHash = (target) => {
-  if (!target) return;
-  history.replaceState(null, "", `#${target}`);
-};
-
-const clearHash = () => {
-  history.replaceState(null, "", `${window.location.pathname}`);
-};
-
-const findWindow = (id) => document.querySelector(`.retro-window[data-window="${id}"]`);
-
-const updateOverlayState = () => {
+const updateLayerState = () => {
   if (!windowLayer) return;
-  const hasOpen = document.querySelector(".retro-window.is-open");
+  const hasOpen = document.querySelector(".window-panel.is-open");
   windowLayer.classList.toggle("is-active", Boolean(hasOpen));
 };
 
-const openWindow = (id, { updateLocation = true } = {}) => {
-  const target = findWindow(id);
-  if (!target) return false;
-  if (!target.classList.contains("is-open")) {
-    target.classList.add("is-open");
-    target.setAttribute("aria-hidden", "false");
-    if (typeof target.focus === "function") {
-      try {
-        target.focus({ preventScroll: true });
-      } catch {
-        target.focus();
-      }
+const showPanel = (id) => {
+  const panel = document.querySelector(`.window-panel[data-window="${id}"]`);
+  if (!panel) return;
+
+  panels.forEach((item) => {
+    if (item !== panel) {
+      item.classList.remove("is-open");
+      item.setAttribute("aria-hidden", "true");
+    }
+  });
+
+  panel.classList.add("is-open");
+  panel.setAttribute("aria-hidden", "false");
+  updateLayerState();
+
+  if (typeof panel.focus === "function") {
+    try {
+      panel.focus({ preventScroll: true });
+    } catch {
+      panel.focus();
     }
   }
-  if (updateLocation) updateHash(id);
-  updateOverlayState();
-  return true;
+
+  history.replaceState(null, "", `#${id}`);
 };
 
-const closeWindow = (id) => {
-  const target = findWindow(id);
-  if (!target) return;
-  target.classList.remove("is-open");
-  target.setAttribute("aria-hidden", "true");
-
-  if (window.location.hash.replace("#", "") === id) {
-    clearHash();
+const closePanel = (id) => {
+  if (id === "all") {
+    panels.forEach((panel) => {
+      panel.classList.remove("is-open");
+      panel.setAttribute("aria-hidden", "true");
+    });
+  } else {
+    const panel = document.querySelector(`.window-panel[data-window="${id}"]`);
+    if (!panel) return;
+    panel.classList.remove("is-open");
+    panel.setAttribute("aria-hidden", "true");
   }
 
-  updateOverlayState();
+  updateLayerState();
+  history.replaceState(null, "", window.location.pathname);
 };
 
 openButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    const id = button.dataset.open;
+    const id = button.dataset.windowTarget;
     if (!id) return;
-    openWindow(id);
+    showPanel(id);
   });
 });
 
 closeButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    const id = button.dataset.close;
+    const id = button.dataset.windowClose;
     if (!id) return;
-    closeWindow(id);
+    closePanel(id);
   });
 });
 
-const handleHash = () => {
-  const id = window.location.hash.replace("#", "");
-  if (id) {
-    openWindow(id, { updateLocation: false });
+const overlay = document.querySelector(".window-overlay");
+overlay?.addEventListener("click", () => closePanel("all"));
+
+window.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    closePanel("all");
   }
+});
+
+const openHashPanel = () => {
+  const id = window.location.hash.replace("#", "");
+  if (!id) return;
+  showPanel(id);
 };
 
-window.addEventListener("hashchange", handleHash);
+window.addEventListener("hashchange", openHashPanel);
 
-formatClock();
-setInterval(formatClock, 10_000);
-
-handleHash();
+setClock();
+setInterval(setClock, 10_000);
+openHashPanel();
