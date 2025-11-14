@@ -1,7 +1,7 @@
 const clockElements = document.querySelectorAll("[data-clock]");
 const openButtons = document.querySelectorAll("[data-open]");
 const closeButtons = document.querySelectorAll("[data-close]");
-const heroSection = document.getElementById("home");
+const windowLayer = document.querySelector(".window-stack");
 
 const formatClock = () => {
   const now = new Date();
@@ -15,11 +15,6 @@ const formatClock = () => {
   });
 };
 
-const scrollIntoView = (element) => {
-  if (!element) return;
-  element.scrollIntoView({ behavior: "smooth", block: "start" });
-};
-
 const updateHash = (target) => {
   if (!target) return;
   history.replaceState(null, "", `#${target}`);
@@ -31,15 +26,28 @@ const clearHash = () => {
 
 const findWindow = (id) => document.querySelector(`.retro-window[data-window="${id}"]`);
 
-const openWindow = (id, { scroll = true, updateLocation = true } = {}) => {
+const updateOverlayState = () => {
+  if (!windowLayer) return;
+  const hasOpen = document.querySelector(".retro-window.is-open");
+  windowLayer.classList.toggle("is-active", Boolean(hasOpen));
+};
+
+const openWindow = (id, { updateLocation = true } = {}) => {
   const target = findWindow(id);
   if (!target) return false;
   if (!target.classList.contains("is-open")) {
     target.classList.add("is-open");
     target.setAttribute("aria-hidden", "false");
+    if (typeof target.focus === "function") {
+      try {
+        target.focus({ preventScroll: true });
+      } catch {
+        target.focus();
+      }
+    }
   }
   if (updateLocation) updateHash(id);
-  if (scroll) scrollIntoView(target);
+  updateOverlayState();
   return true;
 };
 
@@ -53,9 +61,7 @@ const closeWindow = (id) => {
     clearHash();
   }
 
-  if (heroSection) {
-    scrollIntoView(heroSection);
-  }
+  updateOverlayState();
 };
 
 openButtons.forEach((button) => {
