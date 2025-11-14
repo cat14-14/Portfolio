@@ -1,249 +1,383 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Presidium Studio · Eunho Kim</title>
-  <link rel="stylesheet" href="css/retro.css" />
-  <script defer src="js/app.js"></script>
-</head>
-<body>
-  <div class="desktop-shell">
-    <nav class="bookmark-bar">
-      <span>공부</span>
-      <span>역학</span>
-      <span>성공3</span>
-      <span>백준</span>
-      <span class="is-active">VR</span>
-      <span>성공</span>
-      <span>성공2</span>
-      <span>코딩2</span>
-      <span>Meta Horizon</span>
-      <span>부산소마고</span>
-      <span>도서관</span>
-      <span>유니티</span>
-    </nav>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Portfolio – Eunho</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <div class="screen-frame">
+      <!-- 상단 바 -->
+      <header class="top-bar">
+        <div class="logo">
+          <span class="logo-main">Eunho</span><span class="logo-last">Heras</span>
+        </div>  
 
-    <section class="screen">
-      <header class="screen-header">
-        <div>
-          <p class="tagline">XR · VR PERSONAL OS</p>
-          <div class="brand">Presidium <span>Studio</span></div>
-          <div class="header-lines">
-            <span></span><span></span><span></span><span></span>
+        <div class="top-right">
+          <div class="top-icons">
+            <button class="icon-btn" aria-label="Sound">
+              ▷
+            </button>
+            <button
+              class="icon-btn"
+              aria-label="Contact"
+              data-window="social"
+              title="Open Social Links"
+            >
+              ✉
+            </button>
+            <button
+              class="icon-btn"
+              aria-label="Settings"
+              data-window="settings"
+              title="Open Settings"
+            >
+              ⚙
+            </button>
           </div>
-        </div>
-
-        <div class="status-tray">
-          <a class="status-button" href="mailto:kehlove09@gmail.com" aria-label="메일">
-            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="6" width="18" height="12" rx="2"></rect>
-              <path d="M4 8l8 6 8-6"></path>
-            </svg>
-          </a>
-          <button class="status-button" type="button" aria-label="미디어">
-            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-              <polygon points="9 7 19 12 9 17 9 7"></polygon>
-              <rect x="4" y="7" width="3" height="10"></rect>
-            </svg>
-          </button>
-          <div class="clock" data-clock>--:--</div>
+          <div class="clock" id="clock"></div>
         </div>
       </header>
 
-      <div class="screen-body">
-        <div class="intro">
-          <p>안녕하세요, XR · VR 인터랙션을 설계하는 김은호입니다.</p>
-          <p>레트로 데스크톱 감성을 빌려 사람들이 기술을 더 친근하게 느끼도록 만듭니다.</p>
-          <p class="hint">오른쪽 아이콘을 눌러 폴더를 열어보세요.</p>
-        </div>
+      <div class="top-lines"></div>
 
-        <div class="app-dock" role="navigation" aria-label="데스크톱 앱">
-          <button class="app-icon" type="button" data-window-target="projects">
-            <span class="icon-emoji">📁</span>
-            <span>Projects</span>
+      <!-- 데스크톱 영역 -->
+      <main class="desktop">
+        <section class="desktop-icons">
+          <button class="desktop-icon" data-window="projects">
+            <div class="icon-shape folder"></div>
+            <span class="icon-label">Project</span>
           </button>
-          <button class="app-icon" type="button" data-window-target="designs">
-            <span class="icon-emoji">🎨</span>
-            <span>Designs</span>
-          </button>
-          <button class="app-icon" type="button" data-window-target="social">
-            <span class="icon-emoji">❤</span>
-            <span>Social</span>
-          </button>
-          <button class="app-icon" type="button" data-window-target="about">
-            <span class="icon-emoji">💻</span>
-            <span>About</span>
-          </button>
-        </div>
-      </div>
 
-      <div class="window-layer" data-window-layer>
-        <div class="window-overlay" data-window-close="all"></div>
+          <button class="desktop-icon" data-window="designs">
+            <div class="icon-shape figma"></div>
+            <span class="icon-label">Skills</span>
+          </button>
 
-        <section class="window-panel" data-window="projects" aria-hidden="true" tabindex="-1">
-          <header class="window-header">
-            <button class="window-close" type="button" data-window-close="projects" aria-label="프로젝트 창 닫기">X</button>
-            <div class="window-lines">
-              <span></span><span></span><span></span>
+          <button class="desktop-icon" data-window="social">
+            <div class="icon-shape folder heart"></div>
+            <span class="icon-label">SOCIAL LIFE</span>
+          </button>
+
+          <button class="desktop-icon" data-window="about">
+            <div class="icon-shape sad-mac">
+              <span class="face-eyes">• •</span>
+              <span class="face-mouth">﹀</span>
             </div>
-            <h2>PROJECT ARCHIVE</h2>
-          </header>
-
-          <div class="window-body">
-            <article class="project-card">
-              <header>
-                <span class="badge">COMMERCIAL</span>
-                <h3>CoDuck 유지 보수 플랫폼</h3>
-              </header>
-              <p>
-                소규모 비즈니스가 웹 유지 보수 요청을 티켓으로 전송하면 24시간 내 해결하는 구독형 서비스.
-                Trello 자동화와 Stripe 결제를 설계했습니다.
-              </p>
-              <footer>
-                <span>WordPress</span>
-                <span>Elementor</span>
-                <span>Stripe</span>
-              </footer>
-            </article>
-
-            <article class="project-card">
-              <header>
-                <span class="badge">XR</span>
-                <h3>Presidium Systems</h3>
-              </header>
-              <p>
-                유지보수팀이 장비 상태를 실시간으로 확인하는 대시보드.
-                도트 텍스처와 타이포로 레트로 UI를 구현했습니다.
-              </p>
-              <footer>
-                <span>Realtime</span>
-                <span>UX</span>
-                <span>Dashboard</span>
-              </footer>
-            </article>
-
-            <article class="project-card">
-              <header>
-                <span class="badge">EXPERIMENT</span>
-                <h3>Octet Rule Lab</h3>
-              </header>
-              <p>
-                AR 카드와 브라우저를 결합한 화학 실험실. 제스처에 따라 분자 모델이 생성되고 결합 상태를 즉시 피드백합니다.
-              </p>
-              <footer>
-                <span>WebXR</span>
-                <span>Next.js</span>
-                <span>Education</span>
-              </footer>
-            </article>
-          </div>
+            <span class="icon-label">ABOUT ME</span>
+          </button>
         </section>
+      </main>
 
-        <section class="window-panel" data-window="designs" aria-hidden="true" tabindex="-1">
-          <header class="window-header">
-            <button class="window-close" type="button" data-window-close="designs" aria-label="디자인 창 닫기">X</button>
-            <div class="window-lines">
-              <span></span><span></span><span></span>
-            </div>
-            <h2>DESIGN NOTES</h2>
-          </header>
+      <!-- ===== 윈도우들 ===== -->
 
-          <div class="window-body">
-            <p class="note">
-              모눈 배경, 활자, 라운드 모서리로 디지털 공간에도 물성을 부여합니다.
-              Rafa Heras의 OS 스타일에서 영감을 받은 후 나만의 질감을 연구했습니다.
-            </p>
-            <ul class="tag-list">
-              <li>Figma</li>
-              <li>Blender</li>
-              <li>Spline</li>
-              <li>After Effects</li>
-              <li>Notion</li>
+      <!-- Projects Window -->
+      <section class="window" id="window-projects">
+        <header class="window-header">
+          <button class="window-close" aria-label="Close">✕</button>
+          <div class="window-lines"></div>
+        </header>
+        <div class="window-body window-split">
+          <aside class="window-sidebar">
+            <button class="sidebar-title">PROYECTOS WEB</button>
+            <ul class="folder-list">
+              <li class="folder-item active" data-project="coduck">CoDuck</li>
+              <li class="folder-item" data-project="delirium">Delirium</li>
+              <li class="folder-item" data-project="ucm">UCM</li>
+              <li class="folder-item" data-project="madmusic">MadMusic</li>
+              <li class="folder-item" data-project="hysteria">Hysteria</li>
+              <li class="folder-item" data-project="deepdata">Deep Data</li>
+              <li class="folder-item" data-project="pragma">Pragma</li>
+              <li class="folder-item" data-project="superexpress">
+                Super Express
+              </li>
             </ul>
-            <div class="design-grid">
-              <article>
-                <h3>Immersive Whiteboard</h3>
-                <p>VR 아이디어 세션을 위한 협업 보드. 모눈지 질감과 타자기 서체를 사용했습니다.</p>
-              </article>
-              <article>
-                <h3>Presidium Badge</h3>
-                <p>와이어프레임과 모노그램을 섞어 빈티지 스티커 패키지를 제작했습니다.</p>
-              </article>
-              <article>
-                <h3>Library Terminal</h3>
-                <p>Playfair 서체와 픽셀 아이콘으로 디지털 도서관 단말기를 디자인했습니다.</p>
-              </article>
-            </div>
-          </div>
-        </section>
+          </aside>
 
-        <section class="window-panel" data-window="social" aria-hidden="true" tabindex="-1">
-          <header class="window-header">
-            <button class="window-close" type="button" data-window-close="social" aria-label="소셜 창 닫기">X</button>
-            <div class="window-lines">
-              <span></span><span></span><span></span>
-            </div>
-            <h2>SOCIAL LIFE</h2>
-          </header>
-
-          <div class="window-body">
-            <div class="info-block">
-              <h3>CONTACT</h3>
-              <ul>
-                <li><a href="mailto:kehlove09@gmail.com">kehlove09@gmail.com</a></li>
-                <li><a href="https://www.linkedin.com/in/eunho-kim-xr" target="_blank" rel="noopener noreferrer">LinkedIn · @eunho-kim-xr</a></li>
-                <li><a href="https://honored-innocent-624.notion.site/Eunho-Kim-XR-VR-Developer-Portpolio-26a0a67a58178094953cecb7e3689249?source=copy_link" target="_blank" rel="noopener noreferrer">Notion · 작업 다이어리</a></li>
-              </ul>
-            </div>
-            <div class="info-block">
-              <h3>COMMUNITY</h3>
-              <ul>
-                <li>Unity XR 워크숍 진행 (2024~)</li>
-                <li>부산소마고 메타버스 연구 동아리 리드</li>
-                <li>XR Creator Meetup 운영진</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <section class="window-panel" data-window="about" aria-hidden="true" tabindex="-1">
-          <header class="window-header">
-            <button class="window-close" type="button" data-window-close="about" aria-label="소개 창 닫기">X</button>
-            <div class="window-lines">
-              <span></span><span></span><span></span>
-            </div>
-            <h2>ABOUT ME</h2>
-          </header>
-
-          <div class="window-body">
-            <p class="note">
-              XR · VR 시뮬레이션과 인터랙션 설계를 즐기는 개발자입니다.
-              기술이 친근한 공간이 되도록 빈티지 감각을 덧입힙니다.
+          <article class="window-content">
+            <h1 class="project-title" id="project-title">CoDuck</h1>
+            <h2 class="project-subtitle" id="project-subtitle">
+              Innovación en Mantenimiento Web
+            </h2>
+            <p class="project-text" id="project-body-1">
+              CoDuck es una plataforma pensada para ofrecer soporte y
+              mantenimiento continuo para sitios web. Texto de ejemplo: reemplaza
+              este párrafo con la descripción real de tu proyecto, servicios o
+              estudio.
             </p>
-            <div class="info-block">
-              <h3>NOW</h3>
-              <ul>
-                <li>Presidium Studio · XR/VR Developer</li>
-                <li>부산소마고 3학년, 메타버스 연구</li>
-                <li>커뮤니티 강연: Unity XR 워크숍</li>
-              </ul>
+            <p class="project-text" id="project-body-2">
+              Puedes hablar de tecnologías usadas, tipo de clientes, objetivos
+              del proyecto o resultados conseguidos. Mantén el tono sencillo y
+              claro.
+            </p>
+
+            <p class="project-tags" id="project-tags">
+              WORDPRESS | ELEMENTOR | PHP | JAVASCRIPT | STRIPE
+            </p>
+
+            <div class="project-preview">
+              <div class="preview-frame">
+                <div class="preview-screen">
+                  <span class="preview-placeholder" id="project-preview-label">
+                    Project Screenshot Placeholder
+                  </span>
+                </div>
+              </div>
             </div>
-            <div class="info-block">
-              <h3>STACK</h3>
-              <ul class="tag-list">
-                <li>Unity</li>
-                <li>C#</li>
-                <li>WebXR</li>
-                <li>Three.js</li>
-                <li>Blender</li>
-                <li>Python</li>
+          </article>
+        </div>
+      </section>
+
+      <!-- Designs Window -->
+      <section class="window" id="window-designs">
+        <header class="window-header">
+          <button class="window-close" aria-label="Close">✕</button>
+          <div class="window-lines"></div>
+        </header>
+        <div class="window-body">
+          <h1 class="window-title">Skills</h1>
+          <p class="window-intro">
+            I build interactive XR experiences that blur the line between the real and the virtual. Based on Unity (C#), I design spatial interactions and leverage C/C++ for performance optimization to deliver seamless immersion.
+          </p>
+
+          <div class="social-grid">
+            <a href="#" target="_blank" class="social-icon">
+              <div class="social-shape circle"><img src="image/Clanguage.png" alt="C"></div>
+              <span>C</span>
+            </a>
+
+            <a href="#" target="_blank" class="social-icon">
+              <div class="social-shape square"><img src="image/icons8-c-++-48.png" alt="C++"></div>
+              <span>C++</span>
+            </a>
+
+            <a href="#" target="_blank" class="social-icon">
+              <div class="social-shape square"><img src="image/csharp.svg" alt="C#"></div>
+              <span>C#</span>
+            </a>
+
+            <a href="#" target="_blank" class="social-icon">
+              <div class="social-shape square"><img src="image/unity.svg" alt="C++"></div>
+              <span>Unity</span>
+            </a>
+            <a href="#" target="_blank" class="social-icon">
+              <div class="social-shape square"><img src="image/python.svg" alt="Python"></div>
+              <span>Python</span>
+            </a>
+            <a href="#" target="_blank" class="social-icon">
+              <div class="social-shape square"><img src="image/java.svg" alt="Java"></div>
+              <span>Java</span>
+            </a>
+            <a href="#" target="_blank" class="social-icon">
+              <div class="social-shape square"><img src="image/unreal-engine.svg" alt="unreal-engine"></div>
+              <span>Unreal Engine 5</span>
+            </a>
+            <a href="#" target="_blank" class="social-icon">
+              <div class="social-shape square"><img src="image/OpenXR.png" alt="OpenXR"></div>
+              <span>OpenXR</span>
+            </a>
+            <a href="#" target="_blank" class="social-icon">
+              <div class="social-shape square"><img src="image/OpenVR.png" alt="OpenVR"></div>
+              <span>OpenVR</span>
+            </a>
+            <a href="#" target="_blank" class="social-icon">
+              <div class="social-shape square"><img src="image/linux.svg" alt="Linux"></div>
+              <span>Linux</span>
+            </a>
+            <a href="#" target="_blank" class="social-icon">
+              <div class="social-shape square"><img src="image/ubuntu.svg" alt="Ubuntu"></div>
+              <span>Ubuntu</span>
+            </a>
+            <a href="#" target="_blank" class="social-icon">
+              <div class="social-shape square"><img src="image/blender.svg" alt="Blender"></div>
+              <span>Blender</span>
+            </a>
+            <a href="#" target="_blank" class="social-icon">
+              <div class="social-shape square"><img src="image/figma.svg" alt=""></div>
+              <span>Figma</span>
+            </a>
+            <a href="#" target="_blank" class="social-icon">
+              <div class="social-shape square"><img src="image/icons8-html-5-50.png" alt=""></div>
+              <span>HTML</span>
+            </a>
+            <a href="#" target="_blank" class="social-icon">
+              <div class="social-shape square"><img src="image/icons8-css3-50.png" alt=""></div>
+              <span>CSS</span>
+            </a>
+            <a href="#" target="_blank" class="social-icon">
+              <div class="social-shape square"><img src="image/icons8-자바-스크립트-50.png" alt=""></div>
+              <span>JS</span>
+            </a>
+            <a href="#" target="_blank" class="social-icon">
+              <div class="social-shape square"><img src="image/icons8-반응하다-80.png" alt=""></div>
+              <span>React</span>
+            </a>
+            <a href="#" target="_blank" class="social-icon">
+              <div class="social-shape square"><img src="image/icons8-github의-50.png" alt=""></div>
+              <span>Git/GitHub</span>
+            </a>
+          <!-- <div class="design-grid">
+            <article class="design-card">
+              <h2>C</h2>    
+              <p>
+                Flight-sim style HUD exploration for mixed-reality training
+                scenarios.
+              </p>
+              <span class="design-meta">Figma · XR UI</span>
+            </article>
+            <article class="design-card">
+              <h2>CodeCache Landing</h2>
+              <p>
+                Single-page concept for a snippet manager aimed at power
+                developers.
+              </p>
+              <span class="design-meta">Web · Branding</span>
+            </article>
+            <article class="design-card">
+              <h2>Presidium Systems Identity</h2>
+              <p>
+                Minimal logotype and layout language for a defense-tech inspired
+                XR studio.
+              </p>
+              <span class="design-meta">Identity · Systems</span>
+            </article> -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Social Window -->
+      <section class="window" id="window-social">
+        <header class="window-header">
+          <button class="window-close" aria-label="Close">✕</button>
+          <div class="window-lines"></div>
+        </header>
+        <div class="window-body">
+          <h1 class="window-title">Social Life</h1>
+          <p class="window-intro">
+            Find me on these platforms. Replace the links with your own
+            profiles.
+          </p>
+
+          <div class="social-grid">
+            <a href="#" target="_blank" class="social-icon">
+              <div class="social-shape circle">WA</div>
+              <span>WHATSAPP</span>
+            </a>
+
+            <a href="#" target="_blank" class="social-icon">
+              <div class="social-shape square">IG</div>
+              <span>INSTAGRAM</span>
+            </a>
+
+            <a href="#" target="_blank" class="social-icon">
+              <div class="social-shape square">in</div>
+              <span>LINKEDIN</span>
+            </a>
+
+            <a href="#" target="_blank" class="social-icon">
+              <div class="social-shape cassette">
+                <span class="tape">▌▌</span>
+              </div>
+              <span>SPOTIFY</span>
+            </a>
+
+            <a href="mailto:you@example.com" class="social-icon">
+              <div class="social-shape envelope"></div>
+              <span>EMAIL</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- About Window -->
+      <section class="window" id="window-about">
+        <header class="window-header">
+          <button class="window-close" aria-label="Close">✕</button>
+          <div class="window-lines"></div>
+        </header>
+        <div class="window-body">
+          <h1 class="window-title">About Me</h1>
+          <p class="window-intro">
+            XR / VR / AR developer and student focused on immersive training
+            systems, virtual operating environments and web tooling.
+          </p>
+
+          <div class="about-layout">
+            <div class="about-col">
+              <h2>Profile</h2>
+              <p>
+                I enjoy building systems that feel like complete worlds:
+                virtual OS shells, simulation environments and developer tools.
+                My work mixes Unity, C#, modern web stacks and embedded
+                devices.
+              </p>
+              <p>
+                Currently exploring VR training, cockpit simulation, and
+                full-stack tools under the umbrella of "Presidium Systems".
+              </p>
+            </div>
+            <div class="about-col">
+              <h2>Capabilities</h2>
+              <ul class="about-list">
+                <li>Unity · C# · XR Interaction Toolkit</li>
+                <li>Web – HTML / CSS / JavaScript / React</li>
+                <li>Supabase · SQL · Authentication & RLS</li>
+                <li>Prototype hardware & 3D modeling</li>
               </ul>
             </div>
           </div>
-        </section>
-      </div>
-    </section>
-  </div>
-</body>
+        </div>
+      </section>
+
+      <!-- Settings Window -->
+      <section class="window" id="window-settings">
+        <header class="window-header">
+          <button class="window-close" aria-label="Close">✕</button>
+          <div class="window-lines"></div>
+        </header>
+        <div class="window-body">
+          <h1 class="window-title">Settings</h1>
+          <p class="window-intro">
+            Small tweaks to make the portfolio feel more like your own
+            workspace.
+          </p>
+
+          <div class="settings-grid">
+            <section class="settings-block">
+              <h2>Appearance</h2>
+              <label class="setting-row">
+                <span>Dark mode</span>
+                <input type="checkbox" id="toggle-theme" />
+              </label>
+              <label class="setting-row">
+                <span>Reduce motion</span>
+                <input type="checkbox" id="toggle-motion" />
+              </label>
+            </section>
+
+            <section class="settings-block">
+              <h2>Details</h2>
+              <label class="setting-row">
+                <span>Grid intensity</span>
+                <input
+                  type="range"
+                  id="grid-strength"
+                  min="0"
+                  max="100"
+                  value="40"
+                />
+              </label>
+              <p class="settings-help">
+                These settings are stored only in this browser using
+                <code>localStorage</code>.
+              </p>
+            </section>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script src="/js/script.js"></script>
+  </body>
 </html>
